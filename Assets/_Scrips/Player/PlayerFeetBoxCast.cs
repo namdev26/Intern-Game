@@ -1,16 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerFeetBoxCast : MonoBehaviour
 {
-    [SerializeField] private PlayerController playerController;
+    public PlayerController PlayerControllerScript;
     private void OnTriggerStay2D(Collider2D collision)
     {
-        playerController.onGround = true;
+        PlayerControllerScript.onGround = true;
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        playerController.onGround = false;
+        PlayerControllerScript.onGround = false;
     }
+
 }
