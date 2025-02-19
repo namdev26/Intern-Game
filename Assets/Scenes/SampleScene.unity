@@ -281,7 +281,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 8
+  m_LinearDrag: 1
   m_AngularDrag: 0.05
   m_GravityScale: 2
   m_Material: {fileID: 6200000, guid: fde8e3ff5bab6d44c907c70bb6fd1196, type: 2}
@@ -309,10 +309,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidBody2D: {fileID: 29879848}
   spriteRenderer: {fileID: 29879844}
-  moveSpeed: 3
-  jumpSpeed: 16
-  playerAnimation: {fileID: 29879845}
+  moveSpeed: 4
+  jumpSpeed: 11
   onGround: 0
+  playerAnimator: {fileID: 29879845}
+  currentAnimation: 
 --- !u!1 &31040840
 GameObject:
   m_ObjectHideFlags: 0
