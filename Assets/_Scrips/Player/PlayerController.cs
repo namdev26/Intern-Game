@@ -8,8 +8,8 @@ public class PlayerController : NamMonoBehaviour
     [SerializeField] private float moveSpeed = 4f;
     [SerializeField] private float jumpSpeed = 11f;
     [SerializeField] public bool onGround;
-    [SerializeField] private Animator playerAnimator;
-    public string currentAnimation = "";
+    [SerializeField] private PlayerAnimation playerAnimation;
+
     private Vector2 VectorToRight = new Vector2(1, 0);
     private Vector2 VectorToLeft = new Vector2(-1, 0);
     private Vector2 VectorToUp = new Vector2(0, 1);
@@ -17,28 +17,32 @@ public class PlayerController : NamMonoBehaviour
     protected override void LoadComponent()
     {
         base.LoadComponent();
-        this.LoadPlayerAnimation();
-        this.Rigidbody2D();
+        this.LoadRigidbody2D();
         this.LoadSpriteRenderer();
+        this.LoadPlayerAnimation();
     }
-    private void LoadPlayerAnimation()
-    {
-        if (this.playerAnimator != null) return;
-        this.playerAnimator = transform.GetComponent<Animator>();
-        Debug.LogWarning("Load PlayerAnimator");
-    }
-    private void Rigidbody2D()
+
+    private void LoadRigidbody2D()
     {
         if (this.rigidBody2D != null) return;
         this.rigidBody2D = transform.GetComponent<Rigidbody2D>();
         Debug.LogWarning("Load Rigidbody2D");
     }
+
     private void LoadSpriteRenderer()
     {
         if (this.spriteRenderer != null) return;
         this.spriteRenderer = transform.GetComponent<SpriteRenderer>();
         Debug.LogWarning("Load SpriteRenderer");
     }
+
+    private void LoadPlayerAnimation()
+    {
+        if (this.playerAnimation != null) return;
+        this.playerAnimation = transform.GetComponentInChildren<PlayerAnimation>();
+        Debug.LogWarning("Load PlayerAnimation");
+    }
+
     void Update()
     {
         if (Input.GetKey("right"))
@@ -53,15 +57,16 @@ public class PlayerController : NamMonoBehaviour
         }
         else
         {
-            AnimationStop();
+            playerAnimation.PlayIdle(onGround);
         }
 
         if (Input.GetKeyDown("up") && onGround)
         {
             rigidBody2D.AddForce(VectorToUp * jumpSpeed, ForceMode2D.Impulse);
-            StartCoroutine(AnimationJump());
+            StartCoroutine(playerAnimation.PlayJump());
         }
     }
+
     void PlayerMove(Vector2 MoveVector)
     {
         Vector2 NewMoveVector = new Vector2(MoveVector.x * moveSpeed, rigidBody2D.velocity.y);
@@ -69,33 +74,12 @@ public class PlayerController : NamMonoBehaviour
 
         if (onGround)
         {
-            PlayingAnimation("Run");
+            playerAnimation.PlayRun();
         }
+    }
 
-    }
-    void RotatePlayer(bool Bool_Value)
+    void RotatePlayer(bool flip)
     {
-        spriteRenderer.flipX = Bool_Value;
-    }
-    void AnimationStop()
-    {
-        if (onGround)
-        {
-            PlayingAnimation("Idle");
-        }
-    }
-    IEnumerator AnimationJump()
-    {
-        yield return new WaitForSeconds(0.1f);
-        PlayingAnimation("Jump");
-    }
-    void PlayingAnimation(string AnimationName)
-    {
-        if (currentAnimation != AnimationName)
-        {
-            currentAnimation = AnimationName;
-            playerAnimator.Play(currentAnimation);
-            Debug.Log("Playing: " + currentAnimation);
-        }
+        spriteRenderer.flipX = flip;
     }
 }
