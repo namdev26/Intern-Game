@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerController : NamMonoBehaviour
 {
@@ -65,10 +66,19 @@ public class PlayerController : NamMonoBehaviour
             rigidBody2D.AddForce(VectorToUp * jumpSpeed, ForceMode2D.Impulse);
             StartCoroutine(playerAnimation.PlayJump());
         }
+        if (Input.GetMouseButtonDown(0) && onGround)
+        {
+            StartCoroutine(playerAnimation.PlayAttackBow());
+        }
+        if (Input.GetMouseButtonDown(1) && onGround)
+        {
+            StartCoroutine(playerAnimation.PlayAttackKnife());
+        }
     }
 
     void PlayerMove(Vector2 MoveVector)
     {
+        if (playerAnimation.IsAttacking()) return; // Không di chuyển khi đang attack
         Vector2 NewMoveVector = new Vector2(MoveVector.x * moveSpeed, rigidBody2D.velocity.y);
         rigidBody2D.velocity = NewMoveVector;
 
