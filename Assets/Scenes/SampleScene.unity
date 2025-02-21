@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 29879847}
   - component: {fileID: 29879848}
   - component: {fileID: 29879849}
+  - component: {fileID: 29879850}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -229,9 +230,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 783767396}
-  - {fileID: 158006471}
+  - {fileID: 627235729}
   - {fileID: 1673814881}
+  - {fileID: 1239576613}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &29879847
@@ -314,6 +315,21 @@ MonoBehaviour:
   jumpSpeed: 11
   onGround: 0
   playerAnimation: {fileID: 1673814882}
+  playerShooting: {fileID: 29879850}
+--- !u!114 &29879850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 29879843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b31c74080783adc4eb58484c334a8905, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arrowPrefab: {fileID: 928270011032386118, guid: e2e18be6d5e1a7f4ba876675ce825b0a, type: 3}
+  shootPoint: {fileID: 1239576613}
 --- !u!1 &158006470
 GameObject:
   m_ObjectHideFlags: 0
@@ -340,12 +356,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 158006470}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.0041, y: -0.289, z: 0}
   m_LocalScale: {x: 0.24125916, y: 0.21219462, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 29879846}
+  m_Father: {fileID: 627235729}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &158006472
 CapsuleCollider2D:
@@ -614,7 +630,6 @@ MonoBehaviour:
   shakeSpeed: 3
   shakeTime: 1
   shakeAngle: 5
-  isShaking: 0
 --- !u!61 &289777121
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -789,7 +804,6 @@ MonoBehaviour:
   shakeSpeed: 3
   shakeTime: 1
   shakeAngle: 5
-  isShaking: 0
 --- !u!61 &473864145
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1056,7 +1070,6 @@ MonoBehaviour:
   shakeSpeed: 3
   shakeTime: 1
   shakeAngle: 5
-  isShaking: 0
 --- !u!61 &534733802
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1181,6 +1194,39 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &627235728
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 627235729}
+  m_Layer: 0
+  m_Name: PlayerMovement
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &627235729
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 627235728}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 783767396}
+  - {fileID: 158006471}
+  m_Father: {fileID: 29879846}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &654986220
 GameObject:
   m_ObjectHideFlags: 0
@@ -1231,7 +1277,6 @@ MonoBehaviour:
   shakeSpeed: 3
   shakeTime: 1
   shakeAngle: 5
-  isShaking: 0
 --- !u!61 &654986223
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1383,12 +1428,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 783767395}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.0112, y: -0.4913, z: 0}
   m_LocalScale: {x: 0.30447146, y: 0.34818342, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 29879846}
+  m_Father: {fileID: 627235729}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &783767397
 BoxCollider2D:
@@ -1533,6 +1578,37 @@ Transform:
   - {fileID: 1861384160}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1239576612
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1239576613}
+  m_Layer: 0
+  m_Name: ShootPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1239576613
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1239576612}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.03, z: 0}
+  m_LocalScale: {x: 1, y: 0, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 29879846}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1653353927
 GameObject:
   m_ObjectHideFlags: 0
@@ -1583,7 +1659,6 @@ MonoBehaviour:
   shakeSpeed: 3
   shakeTime: 1
   shakeAngle: 5
-  isShaking: 0
 --- !u!61 &1653353930
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1855,7 +1930,6 @@ MonoBehaviour:
   shakeSpeed: 3
   shakeTime: 1
   shakeAngle: 5
-  isShaking: 0
 --- !u!61 &1855533595
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -10,7 +10,7 @@ public class PlayerController : NamMonoBehaviour
     [SerializeField] private float jumpSpeed = 11f;
     [SerializeField] public bool onGround;
     [SerializeField] private PlayerAnimation playerAnimation;
-
+    [SerializeField] private PlayerShooting playerShooting;
     private Vector2 VectorToRight = new Vector2(1, 0);
     private Vector2 VectorToLeft = new Vector2(-1, 0);
     private Vector2 VectorToUp = new Vector2(0, 1);
@@ -59,6 +59,7 @@ public class PlayerController : NamMonoBehaviour
         else
         {
             playerAnimation.PlayIdle(onGround);
+            //StartCoroutine(playerAnimation.PlayAttackBow());
         }
 
         if (Input.GetKeyDown("up") && onGround)
@@ -69,6 +70,8 @@ public class PlayerController : NamMonoBehaviour
         if (Input.GetMouseButtonDown(0) && onGround)
         {
             StartCoroutine(playerAnimation.PlayAttackBow());
+            //playerShooting.Shoot();
+
         }
         if (Input.GetMouseButtonDown(1) && onGround)
         {
@@ -92,4 +95,5 @@ public class PlayerController : NamMonoBehaviour
     {
         spriteRenderer.flipX = flip;
     }
+
 }

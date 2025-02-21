@@ -7,13 +7,10 @@ public class ShakeFlower : MonoBehaviour
     [SerializeField] private float shakeSpeed = 0.1f;
     [SerializeField] private float shakeTime = 1f;
     [SerializeField] private float shakeAngle = 5f;
-    [SerializeField] private bool isShaking = false;
-
     private void Start()
     {
         originQuaternion = transform.localRotation;
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -21,10 +18,8 @@ public class ShakeFlower : MonoBehaviour
             StartCoroutine(ShakeEffect());
         }
     }
-
     private IEnumerator ShakeEffect()
     {
-        isShaking = true;
         float time = 0f;
 
         while (time < shakeTime)
@@ -36,8 +31,5 @@ public class ShakeFlower : MonoBehaviour
             yield return null;
         }
         transform.localRotation = originQuaternion;
-        isShaking = false;
     }
-
-
 }
