@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ArrowMovement : NamMonoBehaviour
+public class Arrow : NamMonoBehaviour
 {
     [SerializeField] private float speedShoot = 30f;
     [SerializeField] private Rigidbody2D _rigidbody2D;
@@ -8,4 +8,5 @@ public class ArrowMovement : NamMonoBehaviour
     {
         _rigidbody2D.velocity = transform.right * speedShoot;
     }
+
 }

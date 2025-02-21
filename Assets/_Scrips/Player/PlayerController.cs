@@ -93,7 +93,7 @@ public class PlayerController : NamMonoBehaviour
 
     void RotatePlayer(bool flip)
     {
-        spriteRenderer.flipX = flip;
+        transform.rotation = Quaternion.Euler(0, flip ? 180 : 0, 0);
     }
 
 }
