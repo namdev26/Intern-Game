@@ -10,9 +10,9 @@ public abstract class Despawn : NamMonoBehaviour
     protected virtual void Despawning()
     {
         if (!this.CanDespawn()) return;
-        this.DespawnObj();
+        this.DespawnObject();
     }
-    protected virtual void DespawnObj()
+    public virtual void DespawnObject()
     {
         Destroy(transform.parent.gameObject);
     }

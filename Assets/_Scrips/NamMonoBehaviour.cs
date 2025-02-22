@@ -12,4 +12,16 @@ public class NamMonoBehaviour : MonoBehaviour
     {
         // for override
     }
+    protected virtual void Awake()
+    {
+        //for override
+    }
+    protected virtual void OnEnable()
+    {
+        //for override
+    }
+    protected virtual void ResetValue()
+    {
+        //for override
+    }
 }

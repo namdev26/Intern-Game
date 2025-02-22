@@ -7,10 +7,6 @@ public class PlayerAnimation : NamMonoBehaviour
     [SerializeField] private Animator animator;
     private string currentAnimation = "";
     private bool isAttacking = false;
-    //public PlayerAnimation(Animator animator)
-    //{
-    //    this.animator = animator;
-    //}
     public void PlayRun()
     {
         PlayAnimation("Run");
