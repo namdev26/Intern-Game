@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class JumpState : State
 {
@@ -11,7 +11,7 @@ public class JumpState : State
 
     public override void DoState()
     {
-        // Kh�ng c?n c?p nh?t g� ??c bi?t
+        // Không cần cập nhật gì đặc biệt
     }
 
     public override void ExitState() { }

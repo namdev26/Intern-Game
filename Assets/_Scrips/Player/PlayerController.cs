@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class PlayerController : NamMonoBehaviour
+public class PlayerController1 : NamMonoBehaviour
 {
     [SerializeField] private Rigidbody2D rigidBody2D;
     [SerializeField] private SpriteRenderer spriteRenderer;
