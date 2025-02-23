@@ -74,7 +74,6 @@ public class PlayerController : NamMonoBehaviour
         {
             PlayerJump(VectorToUp);
         }
-
         if ((playerInput.BowAttack || playerInput.KnifeAttack) && onGround)
         {
             isAttacking = true;
@@ -95,27 +94,22 @@ public class PlayerController : NamMonoBehaviour
             playerStateMachine.SetState(idleState);
         }
     }
-
     public void ResetAttackState()
     {
         isAttacking = false;
     }
-
     private void PlayerJump(Vector2 direction)
     {
         if (!onGround || isJumping) return; // Tránh spam nhảy liên tục
-
         rb.velocity = new Vector2(rb.velocity.x, jumpForce); // Giữ lại vận tốc ngang khi nhảy
         onGround = false;
         isJumping = true;
         playerStateMachine.SetState(jumpState);
     }
-
     private void RotatePlayer(bool flip)
     {
         transform.rotation = Quaternion.Euler(0, flip ? 180 : 0, 0);
     }
-
     private void PlayerMove(Vector2 direction)
     {
         rb.velocity = new Vector2(direction.x * moveSpeed, rb.velocity.y);

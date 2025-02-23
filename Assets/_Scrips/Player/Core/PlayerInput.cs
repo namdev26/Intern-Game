@@ -7,7 +7,6 @@ public class PlayerInput : MonoBehaviour
     public bool Jump { get; private set; }
     public bool BowAttack { get; private set; } // T?n công t?m xa (cung)
     public bool KnifeAttack { get; private set; }  // T?n công c?n chi?n (dao)
-
     public bool IsMoving => MoveLeft || MoveRight;
 
     private void Update()

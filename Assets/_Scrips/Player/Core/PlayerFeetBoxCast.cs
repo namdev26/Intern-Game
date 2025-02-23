@@ -9,7 +9,6 @@ public class PlayerFeetBoxCast : NamMonoBehaviour
         base.LoadComponent();
         LoadPlayerController();
     }
-
     private void LoadPlayerController()
     {
         if (playerController != null) return;
