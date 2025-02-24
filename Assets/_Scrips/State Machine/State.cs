@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public abstract class State
 {
@@ -12,4 +12,5 @@ public abstract class State
     public abstract void EnterState();
     public abstract void DoState();
     public abstract void ExitState();
+
 }

@@ -18,8 +18,13 @@ public class MonsterChaseState : State
     public override void DoState()
     {
         // Đuổi theo người chơi
+        // Tính hướng từ quái vật đến người chơi
+        monster.UpdateFacingDirection(monster.player.position);
         Vector2 direction = (monster.player.position - monster.transform.position).normalized;
-        monster.transform.position += (Vector3)direction * monster.chaseSpeed * Time.deltaTime;
+        // Chỉ lấy thành phần X của direction, đặt Y = 0 để không di chuyển theo Y
+        Vector2 horizontalDirection = new Vector2(direction.x, 0f);
+        // Di chuyển quái vật, giữ Y cố định
+        monster.transform.position += (Vector3)horizontalDirection * monster.chaseSpeed * Time.deltaTime;
 
         // Chuyển sang Attack nếu đủ gần
         if (monster.DistanceToPlayer() < monster.attackRange)

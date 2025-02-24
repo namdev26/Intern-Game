@@ -36,6 +36,7 @@ public class MonsterAttackState : State
         else if (monster.DistanceToPlayer() > monster.detectionRange)
         {
             monster.ChangeState(monster.idleState);
+
         }
     }
 
@@ -48,6 +49,7 @@ public class MonsterAttackState : State
     {
         Debug.Log("Quái vật tấn công người chơi!");
         animator.Play("Attack");
+        monster.UpdateFacingDirection(monster.player.position);
         // Thêm logic gây sát thương
     }
 }
