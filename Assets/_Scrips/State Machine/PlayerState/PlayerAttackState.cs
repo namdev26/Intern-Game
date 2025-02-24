@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 
-public class AttackState : State
+public class PlayerAttackState : State
 {
     private PlayerInput playerInput;
 
-    public AttackState(Animator animator, PlayerInput playerInput) : base(animator)
+    public PlayerAttackState(Animator animator, PlayerInput playerInput) : base(animator)
     {
         this.playerInput = playerInput;
     }

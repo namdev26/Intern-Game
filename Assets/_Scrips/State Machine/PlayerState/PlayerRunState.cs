@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class RunState : State
+public class PlayerRunState : State
 {
-    public RunState(Animator animator) : base(animator) { }
+    public PlayerRunState(Animator animator) : base(animator) { }
     public override void EnterState()
     {
         animator.Play("Run");

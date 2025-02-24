@@ -12,10 +12,10 @@ public class PlayerController : NamMonoBehaviour
     [SerializeField] public bool isJumping;
     private PlayerStateMachine playerStateMachine;
 
-    private IdleState idleState;
-    private RunState runState;
-    private AttackState attackState;
-    private JumpState jumpState;
+    private PlayerIdleState idleState;
+    private PlayerRunState runState;
+    private PlayerAttackState attackState;
+    private PlayerJumpState jumpState;
 
     private Vector2 VectorToRight = Vector2.right;
     private Vector2 VectorToLeft = Vector2.left;
@@ -53,10 +53,10 @@ public class PlayerController : NamMonoBehaviour
     private void Start()
     {
         playerStateMachine = new PlayerStateMachine();
-        idleState = new IdleState(animator);
-        runState = new RunState(animator);
-        attackState = new AttackState(animator, playerInput);
-        jumpState = new JumpState(animator);
+        idleState = new PlayerIdleState(animator);
+        runState = new PlayerRunState(animator);
+        attackState = new PlayerAttackState(animator, playerInput);
+        jumpState = new PlayerJumpState(animator);
 
         playerStateMachine.SetState(idleState);
     }

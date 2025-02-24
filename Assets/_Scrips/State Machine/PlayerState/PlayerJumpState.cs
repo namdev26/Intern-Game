@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 
-public class IdleState : State
+public class PlayerJumpState : State
 {
-    public IdleState(Animator animator) : base(animator) { }
+    public PlayerJumpState(Animator animator) : base(animator) { }
 
     public override void EnterState()
     {
-        animator.Play("Idle");
+        animator.Play("Jump");
     }
 
     public override void DoState()
