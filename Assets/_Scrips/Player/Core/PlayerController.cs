@@ -69,51 +69,72 @@ public class PlayerController : NamMonoBehaviour
 
     private void HandleMovement()
     {
-        if (isAttacking) return;
+        // Không thoát sớm khi isAttacking, cho phép ngắt trạng thái Attack
+
         if (playerInput.Jump && onGround)
         {
+            if (isAttacking)
+            {
+                isAttacking = false; // Ngắt trạng thái Attack nếu nhảy
+                Debug.Log("Ngắt trạng thái Attack để nhảy");
+            }
             PlayerJump(VectorToUp);
         }
-        if ((playerInput.BowAttack || playerInput.KnifeAttack) && onGround)
+        else if ((playerInput.BowAttack || playerInput.KnifeAttack) && onGround && !isAttacking)
         {
+            // Chỉ vào trạng thái Attack nếu chưa tấn công
             isAttacking = true;
             playerStateMachine.SetState(attackState);
         }
-        if (playerInput.MoveRight)
+        else if (playerInput.MoveRight)
         {
+            if (isAttacking)
+            {
+                isAttacking = false; // Ngắt trạng thái Attack nếu di chuyển
+                Debug.Log("Ngắt trạng thái Attack để chạy phải");
+            }
             PlayerMove(VectorToRight);
             RotatePlayer(false);
         }
         else if (playerInput.MoveLeft)
         {
+            if (isAttacking)
+            {
+                isAttacking = false; // Ngắt trạng thái Attack nếu di chuyển
+                Debug.Log("Ngắt trạng thái Attack để chạy trái");
+            }
             PlayerMove(VectorToLeft);
             RotatePlayer(true);
         }
-        else if (onGround && !isJumping)
+        else if (onGround && !isJumping && !isAttacking)
         {
             playerStateMachine.SetState(idleState);
         }
     }
+
     public void ResetAttackState()
     {
         isAttacking = false;
+        Debug.Log("Trạng thái tấn công kết thúc tự nhiên (Animation Event)");
     }
+
     private void PlayerJump(Vector2 direction)
     {
-        if (!onGround || isJumping) return; // Tránh spam nhảy liên tục
-        rb.velocity = new Vector2(rb.velocity.x, jumpForce); // Giữ lại vận tốc ngang khi nhảy
+        if (!onGround || isJumping) return;
+        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         onGround = false;
         isJumping = true;
         playerStateMachine.SetState(jumpState);
     }
+
     private void RotatePlayer(bool flip)
     {
         transform.rotation = Quaternion.Euler(0, flip ? 180 : 0, 0);
     }
+
     private void PlayerMove(Vector2 direction)
     {
         rb.velocity = new Vector2(direction.x * moveSpeed, rb.velocity.y);
-
         if (onGround)
         {
             playerStateMachine.SetState(runState);

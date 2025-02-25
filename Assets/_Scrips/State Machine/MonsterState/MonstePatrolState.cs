@@ -3,11 +3,11 @@
 public class MonsterPatrolState : State
 {
     private MonsterController monster;
-    private Vector2 pointA; // Điểm bắt đầu (startPos)
-    private Vector2 pointB; // Điểm đích
-    private Vector2 target; // Đang di chuyển tới đích hiện tại
-    private float minTimePatrol; // Thời gian đã trôi qua
-    private float timeSleep; // Thời gian tuần tra cố định cho mỗi lần vào trạng thái
+    private Vector2 pointA;
+    private Vector2 pointB;
+    private Vector2 target;
+    private float minTimePatrol;
+    private float timeSleep;
 
     public MonsterPatrolState(MonsterController monster, Animator animator) : base(animator)
     {
@@ -18,8 +18,8 @@ public class MonsterPatrolState : State
     {
         Debug.Log("Bắt đầu trạng thái Patrol");
         animator.Play("Patrol");
-        pointA = monster.startPos; // Điểm A là vị trí khởi tạo cố định
-        pointB = pointA + Vector2.right * monster.patrolDistance; // Điểm B cách A một khoảng
+        pointA = monster.startPos;
+        pointB = pointA + Vector2.right * monster.patrolDistance;
         if (target == Vector2.zero) // Chỉ chọn ngẫu nhiên lần đầu
         {
             target = Random.Range(0f, 1f) < 0.5f ? pointA : pointB;
@@ -27,7 +27,7 @@ public class MonsterPatrolState : State
         Debug.Log($"Patrol từ A: {pointA} đến B: {pointB}, target hiện tại: {target}");
         minTimePatrol = 0f;
         timeSleep = Random.Range(2f, 5f);
-        monster.UpdateFacingDirection(target); // Quay mặt theo target ban đầu
+        monster.UpdateFacingDirection(target);
     }
 
     public override void DoState()
@@ -64,8 +64,13 @@ public class MonsterPatrolState : State
             {
                 target = pointA;
             }
-            monster.UpdateFacingDirection(target); // Quay mặt theo target mới
+            monster.UpdateFacingDirection(target);
             Debug.Log($"Đã đến đích, target mới: {target}");
+        }
+
+        else
+        {
+            Debug.Log("Quái vật bị stun, giữ nguyên vị trí: " + monster.transform.position);
         }
     }
 
