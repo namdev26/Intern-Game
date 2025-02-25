@@ -11,7 +11,7 @@ public class MonsterChaseState : State
 
     public override void EnterState()
     {
-        Debug.Log("Bắt đầu trạng thái Chase");
+        //Debug.Log("Bắt đầu trạng thái Chase");
         animator.Play("Chase");
     }
 
@@ -40,6 +40,6 @@ public class MonsterChaseState : State
 
     public override void ExitState()
     {
-        Debug.Log("Thoát trạng thái Chase");
+        //Debug.Log("Thoát trạng thái Chase");
     }
 }

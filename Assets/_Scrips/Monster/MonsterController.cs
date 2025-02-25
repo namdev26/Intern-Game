@@ -48,6 +48,7 @@ public class MonsterController : MonoBehaviour
         attackState = new MonsterAttackState(this, animator);
         dieState = new MonsterDieState(this, animator);
         hurtState = new MonsterHurtState(this, animator);
+
         // Bắt đầu ở trạng thái Idle
         ChangeState(idleState);
     }
@@ -73,7 +74,7 @@ public class MonsterController : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Attempted to change to a null state!");
+            //Debug.LogError("Attempted to change to a null state!");
         }
     }
 
@@ -91,7 +92,7 @@ public class MonsterController : MonoBehaviour
     {
         bool flip = targetPosition.x > transform.position.x;
         transform.rotation = Quaternion.Euler(0, flip ? 0 : 180, 0);
-        Debug.Log($"Quay mặt: flip = {flip}, rotation.y = {transform.rotation.eulerAngles.y}");
+        //Debug.Log($"Quay mặt: flip = {flip}, rotation.y = {transform.rotation.eulerAngles.y}");
     }
 
     // Hàm quay mặt theo người chơi (tùy chọn nếu cần dùng trong Chase/Attack)
@@ -101,7 +102,7 @@ public class MonsterController : MonoBehaviour
         {
             bool flip = player.position.x > transform.position.x;
             transform.rotation = Quaternion.Euler(0, flip ? 180 : 0, 0);
-            Debug.Log($"Quay mặt về người chơi: flip = {flip}, rotation.y = {transform.rotation.eulerAngles.y}");
+            //Debug.Log($"Quay mặt về người chơi: flip = {flip}, rotation.y = {transform.rotation.eulerAngles.y}");
         }
     }
 
@@ -117,10 +118,12 @@ public class MonsterController : MonoBehaviour
             ChangeState(hurtState);
         }
     }
+
     public void DestroyMonster()
     {
         Destroy(gameObject);
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Bullet"))
@@ -132,24 +135,33 @@ public class MonsterController : MonoBehaviour
                 Destroy(collision.gameObject);
             }
         }
+        else if (collision.CompareTag("MeleeHitbox")) // Thêm nhận sát thương từ melee hitbox
+        {
+            MeleeHitbox meleeHitbox = collision.GetComponent<MeleeHitbox>();
+            if (meleeHitbox != null && meleeHitbox.IsActive) // Kiểm tra hitbox có đang hoạt động không
+            {
+                TakeDamage(meleeHitbox.Damage); // Gây sát thương từ melee
+                Debug.Log($"Nhận {meleeHitbox.Damage} sát thương từ tấn công cận chiến");
+            }
+        }
     }
+
     public void StopMovement()
     {
         isStunned = true;
-        Debug.Log("Quái vật dừng lại (Animation Event: StopMovement) tại vị trí: " + transform.position);
-        transform.position = transform.position;
+        //Debug.Log("Quái vật dừng lại (Animation Event: StopMovement) tại vị trí: " + transform.position);
+        transform.position = transform.position; // Giữ nguyên vị trí
     }
 
-    // Hàm tiếp tục (Animation Event cuối "Hurt")
     public void ResumeMovement()
     {
         isStunned = false;
-        Debug.Log("Quái vật tiếp tục di chuyển (Animation Event: ResumeMovement)");
+        //Debug.Log("Quái vật tiếp tục di chuyển (Animation Event: ResumeMovement)");
         ChangeState(idleState);
     }
+
     public bool IsStunned()
     {
         return isStunned;
     }
-
 }

@@ -13,7 +13,7 @@ public class MonsterAttackState : State
 
     public override void EnterState()
     {
-        Debug.Log("Bắt đầu trạng thái Attack");
+        //Debug.Log("Bắt đầu trạng thái Attack");
         animator.Play("Attack");
         lastAttackTime = 0f;
     }
@@ -42,12 +42,12 @@ public class MonsterAttackState : State
 
     public override void ExitState()
     {
-        Debug.Log("Thoát trạng thái Attack");
+        //Debug.Log("Thoát trạng thái Attack");
     }
 
     private void Attack()
     {
-        Debug.Log("Quái vật tấn công người chơi!");
+        //Debug.Log("Quái vật tấn công người chơi!");
         animator.Play("Attack");
         monster.UpdateFacingDirection(monster.player.position);
         // Thêm logic gây sát thương

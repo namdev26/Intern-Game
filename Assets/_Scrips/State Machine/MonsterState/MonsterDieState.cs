@@ -11,7 +11,7 @@ public class MonsterDieState : State
 
     public override void EnterState()
     {
-        Debug.Log("B?t ??u tr?ng thái Die");
+        //Debug.Log("B?t ??u tr?ng thái Die");
         animator.Play("Die"); // Phát animation ch?t
     }
 
@@ -23,6 +23,6 @@ public class MonsterDieState : State
 
     public override void ExitState()
     {
-        Debug.Log("Thoát tr?ng thái Die (n?u chuy?n tr?ng thái khác tr??c khi h?y)");
+        //Debug.Log("Thoát tr?ng thái Die (n?u chuy?n tr?ng thái khác tr??c khi h?y)");
     }
 }

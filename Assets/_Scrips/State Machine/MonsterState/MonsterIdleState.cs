@@ -13,7 +13,7 @@ public class MonsterIdleState : State
 
     public override void EnterState()
     {
-        Debug.Log("Bắt đầu trạng thái Idle");
+        //Debug.Log("Bắt đầu trạng thái Idle");
         animator.Play("Idle"); // Phát animation Idle
         idleTime = 0f;         // Reset thời gian đứng yên
     }
@@ -36,6 +36,6 @@ public class MonsterIdleState : State
 
     public override void ExitState()
     {
-        Debug.Log("Thoát trạng thái Idle");
+        //Debug.Log("Thoát trạng thái Idle");
     }
 }

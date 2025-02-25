@@ -11,7 +11,7 @@ public class MonsterHurtState : State
 
     public override void EnterState()
     {
-        Debug.Log("Bắt đầu trạng thái Hurt");
+        //Debug.Log("Bắt đầu trạng thái Hurt");
         animator.Play("Hurt"); // Phát animation bị trúng
         monster.StopMovement(); // Dừng quái vật ngay khi vào trạng thái
     }
@@ -22,7 +22,7 @@ public class MonsterHurtState : State
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Hurt") &&
             animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
         {
-            Debug.Log("Animation Hurt kết thúc, quay lại trạng thái trước đó");
+            //Debug.Log("Animation Hurt kết thúc, quay lại trạng thái trước đó");
             monster.ResumeMovement(); // Tiếp tục di chuyển
             monster.ChangeState(monster.patrolState); // Quay lại Patrol (hoặc trạng thái trước đó)
         }
@@ -30,6 +30,6 @@ public class MonsterHurtState : State
 
     public override void ExitState()
     {
-        Debug.Log("Thoát trạng thái Hurt");
+        //Debug.Log("Thoát trạng thái Hurt");
     }
 }
