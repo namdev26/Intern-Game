@@ -13,9 +13,10 @@ public class MonsterAttackState : State
 
     public override void EnterState()
     {
-        //Debug.Log("Bắt đầu trạng thái Attack");
+        Debug.Log("Bắt đầu trạng thái Attack");
         animator.Play("Attack");
         lastAttackTime = 0f;
+        monster.StartAttack(); // Bắt đầu tấn công khi vào trạng thái Attack
     }
 
     public override void DoState()
@@ -36,20 +37,20 @@ public class MonsterAttackState : State
         else if (monster.DistanceToPlayer() > monster.detectionRange)
         {
             monster.ChangeState(monster.idleState);
-
         }
     }
 
     public override void ExitState()
     {
         //Debug.Log("Thoát trạng thái Attack");
+        monster.EndAttack(); // Kết thúc tấn công khi thoát trạng thái Attack
     }
 
     private void Attack()
     {
-        //Debug.Log("Quái vật tấn công người chơi!");
+        // Debug.Log("Quái vật tấn công người chơi!");
         animator.Play("Attack");
         monster.UpdateFacingDirection(monster.player.position);
-        // Thêm logic gây sát thương
+        // Logic gây sát thương đã được xử lý trong hitbox (AttackHitbox)
     }
 }

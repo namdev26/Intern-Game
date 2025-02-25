@@ -16,6 +16,10 @@ public class MonsterController : MonoBehaviour
     public int health = 10;
     public int maxHealth = 10;
 
+    // Thêm tham chiếu đến hitbox tấn công của quái (GameObject con đại diện cho "tay")
+    [SerializeField] private GameObject attackHitbox; // Hitbox trên tay quái hoặc phần tấn công
+    [SerializeField] private MonsterAttackHitbox attackHitboxScrip; // Script của hitbox tấn công
+
     // Các trạng thái
     public MonsterIdleState idleState;
     public MonsterPatrolState patrolState;
@@ -25,8 +29,12 @@ public class MonsterController : MonoBehaviour
     public MonsterHurtState hurtState;
     private bool isStunned;
 
+    // Thêm biến để theo dõi trạng thái tấn công
+    private bool isAttacking = false;
+
     void Start()
     {
+
         animator = GetComponent<Animator>();
         if (animator == null)
         {
@@ -48,6 +56,12 @@ public class MonsterController : MonoBehaviour
         attackState = new MonsterAttackState(this, animator);
         dieState = new MonsterDieState(this, animator);
         hurtState = new MonsterHurtState(this, animator);
+
+        // Đảm bảo hitbox ban đầu không hoạt động
+        //if (attackHitbox != null)
+        //{
+        //    attackHitbox.SetActive(false);
+        //}
 
         // Bắt đầu ở trạng thái Idle
         ChangeState(idleState);
@@ -74,7 +88,7 @@ public class MonsterController : MonoBehaviour
         }
         else
         {
-            //Debug.LogError("Attempted to change to a null state!");
+            Debug.LogError("Attempted to change to a null state!");
         }
     }
 
@@ -95,7 +109,7 @@ public class MonsterController : MonoBehaviour
         //Debug.Log($"Quay mặt: flip = {flip}, rotation.y = {transform.rotation.eulerAngles.y}");
     }
 
-    // Hàm quay mặt theo người chơi (tùy chọn nếu cần dùng trong Chase/Attack)
+    // Hàm quay mặt theo người chơi
     public void UpdateFacingDirectionToPlayer()
     {
         if (player != null)
@@ -124,6 +138,18 @@ public class MonsterController : MonoBehaviour
         Destroy(gameObject);
     }
 
+    // Kích hoạt hitbox tấn công (gọi từ Animation Event trong animation "Attack")
+    public void ActivateAttackHitbox()
+    {
+        attackHitboxScrip.setAtiveCollider();
+    }
+
+    // Tắt hitbox tấn công (gọi từ Animation Event trong animation "Attack")
+    public void DeactivateAttackHitbox()
+    {
+        attackHitboxScrip.setDeativeCollider();
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Bullet"))
@@ -145,6 +171,23 @@ public class MonsterController : MonoBehaviour
             }
         }
     }
+
+    // Bắt đầu tấn công (gọi từ Animation Event hoặc logic trong MonsterAttackState)
+    public void StartAttack()
+    {
+        isAttacking = true;
+        //Debug.Log($"{name} bắt đầu tấn công!");
+    }
+
+    // Kết thúc tấn công (gọi từ Animation Event)
+    public void EndAttack()
+    {
+        isAttacking = false;
+        //Debug.Log($"{name} kết thúc tấn công!");
+    }
+
+    // Property công khai để kiểm tra trạng thái tấn công
+    public bool IsAttacking => isAttacking;
 
     public void StopMovement()
     {
