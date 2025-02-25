@@ -109,7 +109,7 @@ public class PlayerController : NamMonoBehaviour
     {
         HandleMovement();
         playerStateMachine.UpdateState();
-        HandleInvincibility(); // Cập nhật trạng thái bất tử
+        //HandleInvincibility(); // Cập nhật trạng thái bất tử
     }
 
     private void HandleMovement()
@@ -170,7 +170,7 @@ public class PlayerController : NamMonoBehaviour
             currentHealth -= damage;
             Debug.Log($"Player nhận {damage} sát thương. Máu còn: {currentHealth}");
             lastDamageTime = Time.time; // Cập nhật thời gian nhận sát thương gần nhất
-            StartInvincibility(); // Bắt đầu thời gian bất tử
+            //StartInvincibility(); // Bắt đầu thời gian bất tử
 
             if (currentHealth <= 0)
             {
@@ -299,41 +299,41 @@ public class PlayerController : NamMonoBehaviour
         }
     }
 
-    private void StartInvincibility()
-    {
-        isInvincible = true;
-        invincibilityTimer = invincibilityDuration;
-        Debug.Log("Player trở nên bất tử trong " + invincibilityDuration + " giây");
-        StartCoroutine(BlinkWhileInvincible()); // Bắt đầu nhấp nháy
-    }
+    //private void StartInvincibility()
+    //{
+    //    isInvincible = true;
+    //    invincibilityTimer = invincibilityDuration;
+    //    Debug.Log("Player trở nên bất tử trong " + invincibilityDuration + " giây");
+    //    StartCoroutine(BlinkWhileInvincible()); // Bắt đầu nhấp nháy
+    //}
 
-    private void HandleInvincibility()
-    {
-        if (isInvincible)
-        {
-            invincibilityTimer -= Time.deltaTime;
-            if (invincibilityTimer <= 0)
-            {
-                isInvincible = false;
-                Debug.Log("Player hết thời gian bất tử");
-                if (spriteRenderer != null)
-                {
-                    spriteRenderer.color = Color.white; // Trở về màu ban đầu
-                }
-            }
-        }
-    }
+    //private void HandleInvincibility()
+    //{
+    //    if (isInvincible)
+    //    {
+    //        invincibilityTimer -= Time.deltaTime;
+    //        if (invincibilityTimer <= 0)
+    //        {
+    //            isInvincible = false;
+    //            Debug.Log("Player hết thời gian bất tử");
+    //            if (spriteRenderer != null)
+    //            {
+    //                spriteRenderer.color = Color.white; // Trở về màu ban đầu
+    //            }
+    //        }
+    //    }
+    //}
 
-    private System.Collections.IEnumerator BlinkWhileInvincible()
-    {
-        if (spriteRenderer == null) yield break;
+    //private System.Collections.IEnumerator BlinkWhileInvincible()
+    //{
+    //    if (spriteRenderer == null) yield break;
 
-        float blinkInterval = 0.1f; // Khoảng thời gian nhấp nháy (0.1 giây)
-        while (isInvincible)
-        {
-            spriteRenderer.color = spriteRenderer.color == Color.white ? Color.red : Color.white; // Nhấp nháy giữa trắng và đỏ
-            yield return new WaitForSeconds(blinkInterval);
-        }
-        spriteRenderer.color = Color.white; // Trở về màu ban đầu khi hết bất tử
-    }
+    //    float blinkInterval = 0.1f; // Khoảng thời gian nhấp nháy (0.1 giây)
+    //    while (isInvincible)
+    //    {
+    //        spriteRenderer.color = spriteRenderer.color == Color.white ? Color.red : Color.white; // Nhấp nháy giữa trắng và đỏ
+    //        yield return new WaitForSeconds(blinkInterval);
+    //    }
+    //    spriteRenderer.color = Color.white; // Trở về màu ban đầu khi hết bất tử
+    //}
 }
