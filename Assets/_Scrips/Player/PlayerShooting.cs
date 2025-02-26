@@ -1,50 +1,52 @@
 ﻿using UnityEngine;
 
-public class PlayerShooting : MonoBehaviour
+public class PlayerShooting : NamMonoBehaviour
 {
-    public Transform firePoint;
-    public GameObject bulletPrefab;
-    [SerializeField] private GameObject meleeHitbox; // Tham chiếu đến hitbox cận chiến
-    private MeleeHitbox meleeHitboxScript; // Tham chiếu đến script MeleeHitbox
+    [SerializeField] private Transform firePoint;
+    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private GameObject meleeHitbox;
+    private MeleeHitbox meleeHitboxScript;
 
-    void Start()
+    protected override void LoadComponent()
     {
-        // Load MeleeHitbox
-        meleeHitbox = transform.Find("MeleeHitbox")?.gameObject;
-        if (meleeHitbox == null)
-        {
-            Debug.LogError("MeleeHitbox không tìm thấy trong " + transform.name);
-        }
-        else
-        {
-            meleeHitboxScript = meleeHitbox.GetComponent<MeleeHitbox>();
-            if (meleeHitboxScript == null)
-            {
-                Debug.LogError("MeleeHitbox script không tìm thấy trong " + meleeHitbox.name);
-            }
-            else
-            {
-                Debug.Log("MeleeHitbox được tải thành công trong PlayerShooting");
-            }
-        }
+        base.LoadComponent();
+        this.LoadFirePoint();
+        //this.LoadBulletPrefab();
+        this.LoadMeleeHitbox();
     }
 
-    void Shoot()
+    void LoadFirePoint()
     {
+        if (firePoint != null) return;
+        this.firePoint = transform.Find("ShootPoint");
+    }
+    void LoadMeleeHitbox()
+    {
+        if (meleeHitbox != null) return;
+        this.meleeHitbox = GetComponentInChildren<MeleeHitbox>().gameObject;
+    }
+    public void Shoot() // bắn cung
+    {
+        if (firePoint == null || bulletPrefab == null)
+        {
+            Debug.LogWarning($"{gameObject.name}: Không thể bắn vì FirePoint hoặc BulletPrefab bị thiếu!");
+            return;
+        }
+
         Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-        Debug.Log("Bắn đạn!");
+        Debug.Log($"{gameObject.name}: Bắn đạn!");
     }
 
-    private void DeactivateMeleeHitbox()
+    public void DeactivateMeleeHitbox() // bật khoảng cách attack gần
     {
         if (meleeHitboxScript != null)
         {
             meleeHitboxScript.DeactivateHitbox();
-            Debug.Log("PlayerShooting gọi DeactivateHitbox");
+            Debug.Log($"{gameObject.name}: Gọi DeactivateHitbox");
         }
         else
         {
-            Debug.LogWarning("meleeHitboxScript là null trong PlayerShooting");
+            Debug.LogWarning($"{gameObject.name}: meleeHitboxScript là null!");
         }
     }
 }

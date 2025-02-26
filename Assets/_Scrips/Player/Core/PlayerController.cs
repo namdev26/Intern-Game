@@ -10,8 +10,6 @@ public class PlayerController : NamMonoBehaviour
     [SerializeField] public bool onGround;
     [SerializeField] public bool isAttacking;
     [SerializeField] public bool isJumping;
-    [SerializeField] private int maxHealth = 100; // Máu tối đa
-    [SerializeField] private int currentHealth; // Máu hiện tại
     private GameObject meleeHitbox; // Biến private cho hitbox
     [SerializeField] private MeleeHitbox meleeHitboxScript; // Tham chiếu đến script MeleeHitbox
 
@@ -26,15 +24,9 @@ public class PlayerController : NamMonoBehaviour
     private Vector2 VectorToLeft = Vector2.left;
     private Vector2 VectorToUp = Vector2.up;
 
-    // Thêm biến cho thời gian bất tử
-    private float invincibilityDuration = 2f; // Thời gian bất tử 2 giây
-    private float invincibilityTimer; // Đếm ngược thời gian bất tử
-    private bool isInvincible = false; // Trạng thái bất tử
-    private SpriteRenderer spriteRenderer; // Để nhấp nháy khi bất tử
+    [SerializeField] private PlayerHealth playerHealth; // Thêm tham chiếu đến PlayerHealth
 
-    // Thêm biến để theo dõi thời gian cooldown nhận sát thương
-    private float damageCooldown = 1f; // Thời gian chờ 1 giây giữa các lần nhận sát thương
-    private float lastDamageTime; // Thời điểm nhận sát thương gần nhất
+    //private SpriteRenderer spriteRenderer; // Để nhấp nháy khi bất tử (nếu cần)
 
     protected override void LoadComponent()
     {
@@ -43,7 +35,15 @@ public class PlayerController : NamMonoBehaviour
         LoadAnimator();
         LoadRigidbody2D();
         LoadMeleeHitbox();
-        LoadSpriteRenderer(); // Load SpriteRenderer để nhấp nháy
+        //LoadSpriteRenderer();
+        LoadPlayerHealth(); // Thêm phương thức để load PlayerHealth
+    }
+
+    protected virtual void LoadPlayerHealth()
+    {
+        if (playerHealth != null) return;
+        playerHealth = GetComponent<PlayerHealth>();
+        if (playerHealth == null) Debug.LogError("PlayerHealth không tìm thấy trong " + transform.name);
     }
 
     protected virtual void LoadPlayerInput()
@@ -83,16 +83,15 @@ public class PlayerController : NamMonoBehaviour
         }
     }
 
-    protected virtual void LoadSpriteRenderer()
-    {
-        if (spriteRenderer != null) return;
-        spriteRenderer = GetComponent<SpriteRenderer>(); // Lấy SpriteRenderer của Player
-        if (spriteRenderer == null) Debug.LogWarning("SpriteRenderer không tìm thấy trong " + transform.name);
-    }
+    //protected virtual void LoadSpriteRenderer()
+    //{
+    //    if (spriteRenderer != null) return;
+    //    spriteRenderer = GetComponent<SpriteRenderer>(); // Lấy SpriteRenderer của Player
+    //    if (spriteRenderer == null) Debug.LogWarning("SpriteRenderer không tìm thấy trong " + transform.name);
+    //}
 
     private void Start()
     {
-        currentHealth = maxHealth; // Khởi tạo máu
         playerStateMachine = new PlayerStateMachine();
         idleState = new PlayerIdleState(animator);
         runState = new PlayerRunState(animator);
@@ -101,15 +100,14 @@ public class PlayerController : NamMonoBehaviour
         hurtState = new PlayerHurtState(animator);
 
         playerStateMachine.SetState(idleState);
-        lastDamageTime = -damageCooldown; // Khởi tạo để có thể nhận sát thương ngay lập tức ban đầu
-        invincibilityTimer = 0f; // Khởi tạo thời gian bất tử
+
+        playerStateMachine.SetState(idleState);
     }
 
     private void Update()
     {
         HandleMovement();
         playerStateMachine.UpdateState();
-        //HandleInvincibility(); // Cập nhật trạng thái bất tử
     }
 
     private void HandleMovement()
@@ -164,36 +162,21 @@ public class PlayerController : NamMonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        // Kiểm tra cooldown và trạng thái bất tử trước khi nhận sát thương
-        if (Time.time - lastDamageTime >= damageCooldown && !isInvincible)
+        playerHealth.TakeDamage(damage); // Gọi TakeDamage từ PlayerHealth
+        if (playerHealth.CurrentHealth <= 0)
         {
-            currentHealth -= damage;
-            Debug.Log($"Player nhận {damage} sát thương. Máu còn: {currentHealth}");
-            lastDamageTime = Time.time; // Cập nhật thời gian nhận sát thương gần nhất
-            //StartInvincibility(); // Bắt đầu thời gian bất tử
-
-            if (currentHealth <= 0)
-            {
-                Die();
-            }
-            else
-            {
-                // Kích hoạt animation "Hurt" ngay lập tức và chuyển sang trạng thái Hurt qua Animation Event
-                StartHurtAnimation();
-                animator.Play("Hurt");
-            }
+            // Logic khi chết đã xử lý trong PlayerHealth
         }
         else
         {
-            Debug.Log("Player đang trong cooldown hoặc bất tử, không nhận thêm sát thương!");
+            StartHurtAnimation();
+            //animator.Play("Hurt");
         }
     }
 
     private void Die()
     {
-        Debug.Log("Player đã chết!");
-        gameObject.SetActive(false); // Tạm thời vô hiệu hóa Player
-        //Destroy(gameObject);
+        // Logic Die đã chuyển sang PlayerHealth, không cần ở đây nữa
     }
 
     public void ResetAttackState()
@@ -245,33 +228,17 @@ public class PlayerController : NamMonoBehaviour
     // Các hàm gọi từ Animation Event
     public void ActivateHitbox()
     {
-        if (meleeHitboxScript != null)
-        {
-            meleeHitboxScript.ActivateHitbox();
-            Debug.Log("PlayerController gọi ActivateHitbox");
-        }
-        else
-        {
-            Debug.LogError("meleeHitboxScript là null trong PlayerController");
-        }
+        meleeHitboxScript.ActivateHitbox();
     }
 
     public void DeactivateHitbox()
     {
-        if (meleeHitboxScript != null)
-        {
-            meleeHitboxScript.DeactivateHitbox();
-            Debug.Log("PlayerController gọi DeactivateHitbox");
-        }
-        else
-        {
-            Debug.LogError("meleeHitboxScript là null trong PlayerController");
-        }
+        meleeHitboxScript.DeactivateHitbox();
     }
 
     public void StartHurtAnimation()
     {
-        if (currentHealth > 0 && !(playerStateMachine.CurrentState is PlayerHurtState))
+        if (playerHealth.CurrentHealth > 0 && !(playerStateMachine.CurrentState is PlayerHurtState))
         {
             playerStateMachine.SetState(hurtState);
             Debug.Log("Player chuyển sang trạng thái Hurt qua Animation Event");
@@ -289,51 +256,13 @@ public class PlayerController : NamMonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("EnemyAttack") && !isInvincible) // Chỉ nhận sát thương nếu không bất tử
+        if (collision.CompareTag("EnemyAttack") && !playerHealth.IsInvincible) // Sử dụng IsInvincible từ PlayerHealth
         {
-            MonsterAttackHitbox monsterHitbox = collision.GetComponent<MonsterAttackHitbox>();
-            if (monsterHitbox != null)
+            PlayerHealth playerHealth = collision.GetComponent<PlayerHealth>();
+            if (playerHealth != null)
             {
-                TakeDamage(10); // Gây 10 sát thương khi bị hitbox tấn công của quái chạm
+                playerHealth.TakeDamage(10); // Gây 10 sát thương khi bị hitbox tấn công của quái chạm
             }
         }
     }
-
-    //private void StartInvincibility()
-    //{
-    //    isInvincible = true;
-    //    invincibilityTimer = invincibilityDuration;
-    //    Debug.Log("Player trở nên bất tử trong " + invincibilityDuration + " giây");
-    //    StartCoroutine(BlinkWhileInvincible()); // Bắt đầu nhấp nháy
-    //}
-
-    //private void HandleInvincibility()
-    //{
-    //    if (isInvincible)
-    //    {
-    //        invincibilityTimer -= Time.deltaTime;
-    //        if (invincibilityTimer <= 0)
-    //        {
-    //            isInvincible = false;
-    //            Debug.Log("Player hết thời gian bất tử");
-    //            if (spriteRenderer != null)
-    //            {
-    //                spriteRenderer.color = Color.white; // Trở về màu ban đầu
-    //            }
-    //        }
-    //    }
-    //}
-
-    //private System.Collections.IEnumerator BlinkWhileInvincible()
-    //{
-    //    if (spriteRenderer == null) yield break;
-
-    //    float blinkInterval = 0.1f; // Khoảng thời gian nhấp nháy (0.1 giây)
-    //    while (isInvincible)
-    //    {
-    //        spriteRenderer.color = spriteRenderer.color == Color.white ? Color.red : Color.white; // Nhấp nháy giữa trắng và đỏ
-    //        yield return new WaitForSeconds(blinkInterval);
-    //    }
-    //    spriteRenderer.color = Color.white; // Trở về màu ban đầu khi hết bất tử
-    //}
 }

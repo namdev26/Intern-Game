@@ -164,11 +164,7 @@ public class MonsterController : MonoBehaviour
         else if (collision.CompareTag("MeleeHitbox")) // Thêm nhận sát thương từ melee hitbox
         {
             MeleeHitbox meleeHitbox = collision.GetComponent<MeleeHitbox>();
-            if (meleeHitbox != null && meleeHitbox.IsActive) // Kiểm tra hitbox có đang hoạt động không
-            {
-                TakeDamage(meleeHitbox.Damage); // Gây sát thương từ melee
-                Debug.Log($"Nhận {meleeHitbox.Damage} sát thương từ tấn công cận chiến");
-            }
+            TakeDamage(30); // Gây sát thương từ melee
         }
     }
 

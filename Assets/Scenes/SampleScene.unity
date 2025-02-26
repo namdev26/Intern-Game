@@ -137,6 +137,7 @@ GameObject:
   - component: {fileID: 129071807}
   - component: {fileID: 129071805}
   - component: {fileID: 129071808}
+  - component: {fileID: 129071809}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -245,9 +246,8 @@ MonoBehaviour:
   onGround: 0
   isAttacking: 0
   isJumping: 0
-  maxHealth: 100
-  currentHealth: 0
   meleeHitboxScript: {fileID: 1757619317}
+  playerHealth: {fileID: 129071809}
 --- !u!95 &129071806
 Animator:
   serializedVersion: 5
@@ -336,6 +336,20 @@ MonoBehaviour:
   firePoint: {fileID: 1931400303}
   bulletPrefab: {fileID: 6803107643946405592, guid: fa1e8be5737e5194697a54e7f4e663b2, type: 3}
   meleeHitbox: {fileID: 1757619315}
+--- !u!114 &129071809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 129071801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9259e08f80a50d549a0ff332b6c45526, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  damageCooldown: 1
 --- !u!1 &191014748
 GameObject:
   m_ObjectHideFlags: 0
@@ -3700,7 +3714,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3882e93643e5ee349a83e5d3f7fbf7b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 2
+  meleeHitBoxCollider: {fileID: 1757619318}
 --- !u!70 &1757619318
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -3708,7 +3722,7 @@ CapsuleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1757619315}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:

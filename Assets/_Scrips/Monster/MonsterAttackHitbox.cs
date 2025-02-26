@@ -3,7 +3,7 @@
 public class MonsterAttackHitbox : MonoBehaviour
 {
     private MonsterController monsterController;
-    [SerializeField] private Collider2D collider2DHitBox; // Tham chiếu đến MonsterController của quái
+    [SerializeField] private Collider2D collider2DHitBox; // Tham chiếu đến MonsterController của quáiz
 
     void Start()
     {
@@ -21,10 +21,10 @@ public class MonsterAttackHitbox : MonoBehaviour
 
         if (collision.CompareTag("Player"))
         {
-            PlayerController playerController = collision.GetComponent<PlayerController>();
-            if (playerController != null)
+            PlayerHealth playerHealth = collision.GetComponent<PlayerHealth>();
+            if (playerHealth != null)
             {
-                playerController.TakeDamage(10); // Gây 10 sát thương cho Player (có thể điều chỉnh)
+                playerHealth.TakeDamage(10); // Gây 10 sát thương cho Player (có thể điều chỉnh)
                 Debug.Log($"{monsterController.name} hit Player with attack, causing 10 damage!");
             }
         }
