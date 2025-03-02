@@ -2,14 +2,14 @@
 
 public class MonsterPatrolState : State
 {
-    private MonsterController monster;
+    private BaseMonsterController monster;
     private Vector2 pointA;
     private Vector2 pointB;
     private Vector2 target;
     private float minTimePatrol;
     private float timeSleep;
 
-    public MonsterPatrolState(MonsterController monster, Animator animator) : base(animator)
+    public MonsterPatrolState(BaseMonsterController monster, Animator animator) : base(animator)
     {
         this.monster = monster;
     }
@@ -19,7 +19,7 @@ public class MonsterPatrolState : State
         //Debug.Log("Bắt đầu trạng thái Patrol");
         animator.Play("Patrol");
         pointA = monster.startPos;
-        pointB = pointA + Vector2.right * monster.patrolDistance;
+        pointB = pointA + Vector2.right * monster.MonsterData.patrolDistance;
         if (target == Vector2.zero) // Chỉ chọn ngẫu nhiên lần đầu
         {
             target = Random.Range(0f, 1f) < 0.5f ? pointA : pointB;
@@ -33,12 +33,12 @@ public class MonsterPatrolState : State
     public override void DoState()
     {
         minTimePatrol += Time.deltaTime;
-        float speed = monster.patrolSpeed;
+        float speed = monster.MonsterData.patrolSpeed;
 
-        if (monster.player != null && Vector2.Distance(monster.transform.position, monster.player.position) < monster.detectionRange)
+        if (monster.player != null && Vector2.Distance(monster.transform.position, monster.player.position) < monster.MonsterData.detectionRange)
         {
             //Debug.Log("Phát hiện người chơi, chuyển sang trạng thái Chase");
-            monster.ChangeState(monster.chaseState);
+            monster.ChangeState(monster.ChaseState);
             return;
         }
 
@@ -47,7 +47,7 @@ public class MonsterPatrolState : State
             float randomTarget = Random.Range(0f, 1f);
             target = randomTarget < 0.5f ? pointA : pointB;
             //Debug.Log($"Hết thời gian tuần tra, target mới cho lần sau: {target}");
-            monster.ChangeState(monster.idleState);
+            monster.ChangeState(monster.IdleState);
             return;
         }
 
@@ -55,7 +55,7 @@ public class MonsterPatrolState : State
 
         if (Vector2.Distance(monster.transform.position, target) < 0.1f)
         {
-            monster.ChangeState(monster.idleState);
+            monster.ChangeState(monster.IdleState);
             if (target == pointA)
             {
                 target = pointB;

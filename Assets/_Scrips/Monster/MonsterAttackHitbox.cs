@@ -2,13 +2,13 @@
 
 public class MonsterAttackHitbox : MonoBehaviour
 {
-    private MonsterController monsterController;
+    private GroundMonsterController monsterController;
     [SerializeField] private Collider2D collider2DHitBox; // Tham chiếu đến MonsterController của quáiz
 
     void Start()
     {
         // Tìm MonsterController từ parent (quái cha)
-        monsterController = GetComponentInParent<MonsterController>();
+        monsterController = GetComponentInParent<GroundMonsterController>();
         if (monsterController == null)
         {
             Debug.LogError("MonsterController not found in parent of AttackHitbox!");

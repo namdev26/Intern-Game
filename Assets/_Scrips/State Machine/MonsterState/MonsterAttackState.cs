@@ -2,11 +2,11 @@
 
 public class MonsterAttackState : State
 {
-    private MonsterController monster;
+    private BaseMonsterController monster;
     private float attackCooldown = 1f;
     private float lastAttackTime;
 
-    public MonsterAttackState(MonsterController monster, Animator animator) : base(animator)
+    public MonsterAttackState(BaseMonsterController monster, Animator animator) : base(animator)
     {
         this.monster = monster;
     }
@@ -29,14 +29,14 @@ public class MonsterAttackState : State
         }
 
         // Chuyển sang Chase nếu ra khỏi tầm tấn công
-        if (monster.DistanceToPlayer() > monster.attackRange)
+        if (monster.DistanceToPlayer() > monster.MonsterData.attackRange)
         {
-            monster.ChangeState(monster.chaseState);
+            monster.ChangeState(monster.ChaseState);
         }
         // Chuyển sang Idle nếu mất dấu người chơi
-        else if (monster.DistanceToPlayer() > monster.detectionRange)
+        else if (monster.DistanceToPlayer() > monster.MonsterData.detectionRange)
         {
-            monster.ChangeState(monster.idleState);
+            monster.ChangeState(monster.IdleState);
         }
     }
 

@@ -2,13 +2,15 @@
 
 public class MonsterIdleState : State
 {
-    private MonsterController monster;
-    private float idleTime;       // Thời gian đã đứng yên
-    private float maxIdleTime = 2f; // Thời gian tối đa đứng yên trước khi tuần tra
+    private BaseMonsterController monster; // Thay đổi từ MonsterController sang BaseMonsterController
+    private float idleTime;                // Thời gian đã đứng yên
+    private float maxIdleTime;             // Thời gian tối đa đứng yên trước khi tuần tra (lấy từ MonsterData)
 
-    public MonsterIdleState(MonsterController monster, Animator animator) : base(animator)
+    public MonsterIdleState(BaseMonsterController monster, Animator animator) : base(animator)
     {
         this.monster = monster;
+        // Lấy maxIdleTime từ MonsterData (đã có trong file bạn cung cấp)
+        this.maxIdleTime = monster.MonsterData.maxIdleTime;
     }
 
     public override void EnterState()
@@ -23,14 +25,14 @@ public class MonsterIdleState : State
         // Tăng thời gian đứng yên
         idleTime += Time.deltaTime;
 
-        if (monster.DistanceToPlayer() < monster.detectionRange)
+        if (monster.DistanceToPlayer() < monster.MonsterData.detectionRange) // Sử dụng data.detectionRange
         {
-            monster.ChangeState(monster.chaseState);
+            monster.ChangeState(monster.ChaseState);
         }
         // Chuyển sang Patrol nếu đứng yên quá lâu
         else if (idleTime >= maxIdleTime)
         {
-            monster.ChangeState(monster.patrolState);
+            monster.ChangeState(monster.PatrolState);
         }
     }
 

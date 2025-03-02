@@ -1,27 +1,56 @@
 ﻿using UnityEngine;
 
-public class MeleeHitbox : MonoBehaviour
+public class MeleeHitbox : NamMonoBehaviour
 {
-    //[SerializeField] private int damage = 30; // Sát thương cận chiến
-    //private bool isActive = false;
-    [SerializeField] private Collider2D meleeHitBoxCollider; // Collider của hitbox cận chiến
-
-    //public bool IsActive => isActive; // Getter để kiểm tra trạng thái hitbox
-    //public int Damage => damage; // Getter để lấy sát thương
-
-    public void ActivateHitbox()
+    [SerializeField] private int damage = 30; // Sát thương cận chiến
+    [SerializeField] private Collider2D meleeHitBoxCollider; // Collider của hitbox
+    public int Damage => damage;
+    protected override void LoadComponent()
     {
-        meleeHitBoxCollider.enabled = true;
+        base.LoadComponent();
+        this.LoadColliderMeleeHitBox();
     }
 
-    public void DeactivateHitbox()
+    void LoadColliderMeleeHitBox()
     {
-        meleeHitBoxCollider.enabled = false;
+        if (meleeHitBoxCollider != null) return;
+        this.meleeHitBoxCollider = GetComponent<Collider2D>();
+        Debug.Log("Load ColliderMeleeHitBox");
+    }
+
+    public void ActivateHitbox() // Gọi từ Animation Event
+    {
+        if (meleeHitBoxCollider != null)
+        {
+            meleeHitBoxCollider.enabled = true;
+        }
+        else
+        {
+            Debug.LogWarning("meleeHitBoxCollider is null in ActivateHitbox!");
+        }
+    }
+
+    public void DeactivateHitbox() // Gọi từ Animation Event
+    {
+        if (meleeHitBoxCollider != null)
+        {
+            meleeHitBoxCollider.enabled = false;
+        }
+        else
+        {
+            Debug.LogWarning("meleeHitBoxCollider is null in DeactivateHitbox!");
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        MonsterController monster = collision.GetComponent<MonsterController>();
-        monster.TakeDamage(30);
+        if (collision.CompareTag("Enemy"))
+        {
+            GroundMonsterController monster = collision.GetComponent<GroundMonsterController>();
+            if (monster != null)
+            {
+                monster.TakeDamage(damage);
+            }
+        }
     }
 }

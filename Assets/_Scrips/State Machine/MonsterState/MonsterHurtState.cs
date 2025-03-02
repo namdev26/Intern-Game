@@ -2,9 +2,9 @@
 
 public class MonsterHurtState : State
 {
-    private MonsterController monster;
+    private BaseMonsterController monster;
 
-    public MonsterHurtState(MonsterController monster, Animator animator) : base(animator)
+    public MonsterHurtState(BaseMonsterController monster, Animator animator) : base(animator)
     {
         this.monster = monster;
     }
@@ -13,7 +13,7 @@ public class MonsterHurtState : State
     {
         //Debug.Log("Bắt đầu trạng thái Hurt");
         animator.Play("Hurt"); // Phát animation bị trúng
-        monster.StopMovement(); // Dừng quái vật ngay khi vào trạng thái
+        //monster.StopMovement(); // Dừng quái vật ngay khi vào trạng thái
     }
 
     public override void DoState()
@@ -24,7 +24,7 @@ public class MonsterHurtState : State
         {
             //Debug.Log("Animation Hurt kết thúc, quay lại trạng thái trước đó");
             monster.ResumeMovement(); // Tiếp tục di chuyển
-            monster.ChangeState(monster.patrolState); // Quay lại Patrol (hoặc trạng thái trước đó)
+            monster.ChangeState(monster.PatrolState); // Quay lại Patrol (hoặc trạng thái trước đó)
         }
     }
 

@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class MonsterDieState : State
 {
-    private MonsterController monster;
+    private BaseMonsterController monster;
 
-    public MonsterDieState(MonsterController monster, Animator animator) : base(animator)
+    public MonsterDieState(BaseMonsterController monster, Animator animator) : base(animator)
     {
         this.monster = monster;
     }

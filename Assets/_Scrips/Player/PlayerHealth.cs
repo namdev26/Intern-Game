@@ -3,7 +3,7 @@
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private int maxHealth = 100; // Máu tối đa
-    private int currentHealth; // Máu hiện tại
+    [SerializeField] private int currentHealth; // Máu hiện tại
 
     // Thêm biến để theo dõi thời gian cooldown nhận sát thương
     [SerializeField] private float damageCooldown = 1f; // Thời gian chờ 1 giây giữa các lần nhận sát thương
