@@ -149,7 +149,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Bat-Die_0
+      name: 10
       rect:
         serializedVersion: 2
         x: 64
@@ -157,20 +157,20 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: db253b8016429f04685359a12ed1a85e
-      internalID: 202243300
+      spriteID: 7eef6d9dfaa1286469f8468bc13f50a6
+      internalID: -535001866
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bat-Die_1
+      name: 9
       rect:
         serializedVersion: 2
         x: 128
@@ -178,20 +178,20 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 96c58896ff670f24ea6b006ea146a78d
-      internalID: 1046501382
+      spriteID: e168a66d13541c14f8adb2d4439a521c
+      internalID: 456446528
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bat-Die_2
+      name: 8
       rect:
         serializedVersion: 2
         x: 192
@@ -199,20 +199,20 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a03e88b25ce7b4648ad9ab7396c6c8d9
-      internalID: 1761716478
+      spriteID: 0da423c57eacbb14d8ff8bd71b8dbbfd
+      internalID: -1210908929
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bat-Die_3
+      name: 7
       rect:
         serializedVersion: 2
         x: 256
@@ -220,20 +220,20 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3619409465fcf284fb1f661ed29d6412
-      internalID: -629855721
+      spriteID: de5e581bd927e8d41acf97501d0cf4e5
+      internalID: 651059248
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bat-Die_4
+      name: 6
       rect:
         serializedVersion: 2
         x: 320
@@ -241,20 +241,20 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a652fbea4fb43724e81ed610a9b99376
-      internalID: -2030940086
+      spriteID: 3f6b39ace53b7e24daa5171169bde985
+      internalID: -1514894738
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bat-Die_5
+      name: 5
       rect:
         serializedVersion: 2
         x: 384
@@ -262,20 +262,20 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 07be6f8a7ce92d3469e1cd06bc93d30b
-      internalID: -613404366
+      spriteID: 9f07fece4f23149459bb28d68c1872d5
+      internalID: -300301280
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bat-Die_6
+      name: 4
       rect:
         serializedVersion: 2
         x: 448
@@ -283,20 +283,20 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 43e1e9ba7c2a40c4ab159732b7a18655
-      internalID: -720011038
+      spriteID: b075f4b120f37814e8ab883d496ddfdd
+      internalID: 1339398511
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bat-Die_7
+      name: 3
       rect:
         serializedVersion: 2
         x: 512
@@ -304,20 +304,20 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1933983885dc38444b789bcb8fcc6d8a
-      internalID: -1659020791
+      spriteID: 5464eb4e6bb3aa64fb518c337d33223f
+      internalID: 535240755
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bat-Die_8
+      name: 2
       rect:
         serializedVersion: 2
         x: 576
@@ -325,20 +325,20 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b9d28f69e1072a748a24e722639e9e36
-      internalID: 2077643415
+      spriteID: 5695e647c67f15846b54d6fdaa7d819a
+      internalID: -1992945927
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bat-Die_9
+      name: 1
       rect:
         serializedVersion: 2
         x: 640
@@ -346,20 +346,20 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5e385708e8b0d55408aaee796e201ba4
-      internalID: 1686609121
+      spriteID: a21a05241b6a3c140a2cb4b8818c5f94
+      internalID: 1734570995
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bat-Die_10
+      name: 0
       rect:
         serializedVersion: 2
         x: 704
@@ -367,14 +367,14 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2ad1d1ca57af37e49abca3c34a349a19
-      internalID: 597148550
+      spriteID: 8abb99f73a5faaa45bf78660b761b6cd
+      internalID: 1571835177
       vertices: []
       indices: 
       edges: []
@@ -390,17 +390,17 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Bat-Die_0: 202243300
-      Bat-Die_1: 1046501382
-      Bat-Die_10: 597148550
-      Bat-Die_2: 1761716478
-      Bat-Die_3: -629855721
-      Bat-Die_4: -2030940086
-      Bat-Die_5: -613404366
-      Bat-Die_6: -720011038
-      Bat-Die_7: -1659020791
-      Bat-Die_8: 2077643415
-      Bat-Die_9: 1686609121
+      0: 1571835177
+      1: 1734570995
+      10: -535001866
+      2: -1992945927
+      3: 535240755
+      4: 1339398511
+      5: -300301280
+      6: -1514894738
+      7: 651059248
+      8: -1210908929
+      9: 456446528
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

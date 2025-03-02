@@ -1,7 +1,8 @@
-﻿using UnityEngine;
+using UnityEngine;
 
-public class GroundMonsterController : BaseMonsterController
+public class FlyMonsterController : BaseMonsterController
 {
+
     protected override void InitializeStates()
     {
         idleState = new MonsterIdleState(this, animator);
@@ -10,11 +11,14 @@ public class GroundMonsterController : BaseMonsterController
         attackState = new MonsterAttackState(this, animator);
         dieState = new MonsterDieState(this, animator);
         hurtState = new MonsterHurtState(this, animator);
+        flySleepState = new FlyMonsterSleepState(this, animator);
+        flyWakeUpState = new FlyMonsterWakeUpState(this, animator);
     }
 
     protected override void Start()
     {
         base.Start();
+        ChangeState(flySleepState);
     }
 
     protected override void Update()
@@ -22,7 +26,7 @@ public class GroundMonsterController : BaseMonsterController
         base.Update();
     }
 
-    // Quay mặt theo người chơi (tương tự MonsterController)
+    // Quay m?t theo ng??i ch?i (t??ng t? MonsterController)
     public void UpdateFacingDirectionToPlayer()
     {
         if (player != null)

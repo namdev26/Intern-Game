@@ -11,5 +11,6 @@ public class MonsterData : ScriptableObject
     public float patrolDistance = 15f;
     public float maxIdleTime = 2f; // Thời gian đứng yên tối đa
     public int maxHealth = 10;
+    public float wakeUpRange = 2f;
     public bool moveHorizontallyOnly = true; // True: chỉ di chuyển ngang (quái đất), False: di chuyển cả X/Y (quái bay)
 }

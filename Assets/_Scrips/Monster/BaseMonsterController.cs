@@ -22,6 +22,8 @@ public abstract class BaseMonsterController : MonoBehaviour
     protected State attackState;
     protected State dieState;
     protected State hurtState;
+    protected State flySleepState;
+    protected State flyWakeUpState;
 
     public State IdleState => idleState;
     public State PatrolState => patrolState;
@@ -29,6 +31,8 @@ public abstract class BaseMonsterController : MonoBehaviour
     public State AttackState => attackState;
     public State DieState => dieState;
     public State HurtState => hurtState;
+    public State FlySleepState => flySleepState;
+    public State FlyWakeUpState => flyWakeUpState;
 
     public void DestroyMonster() => Destroy(gameObject);
     public void ActivateAttackHitbox() => attackHitboxScript?.setAtiveCollider();

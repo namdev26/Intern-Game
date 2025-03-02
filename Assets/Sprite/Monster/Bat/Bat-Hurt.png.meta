@@ -149,7 +149,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Bat-Hurt_0
+      name: 4
       rect:
         serializedVersion: 2
         x: 0
@@ -157,20 +157,20 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e1b39b5f6c677584ca545e18b6ea6b23
-      internalID: 326575767
+      spriteID: 4f0321894b80a6344aeaefd79179eb77
+      internalID: 944156093
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bat-Hurt_1
+      name: 3
       rect:
         serializedVersion: 2
         x: 64
@@ -178,20 +178,20 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4f6df52848c03a649aa4a7c689761a0a
-      internalID: 184217389
+      spriteID: 1e7f11d303ab4014eb078f01364925cf
+      internalID: -1737004616
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bat-Hurt_2
+      name: 2
       rect:
         serializedVersion: 2
         x: 128
@@ -199,20 +199,20 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 592fb6b4e0ad4794091567fa0dcb4de4
-      internalID: -2138702345
+      spriteID: 02d4835170e2392488208316969bb743
+      internalID: 838811454
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bat-Hurt_3
+      name: 1
       rect:
         serializedVersion: 2
         x: 192
@@ -220,20 +220,20 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7c3c92662334dab47bed88af36ee91f0
-      internalID: 1928820057
+      spriteID: ea6374091df52c243bffcd51cb59c638
+      internalID: 1351961588
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bat-Hurt_4
+      name: 0
       rect:
         serializedVersion: 2
         x: 256
@@ -241,14 +241,14 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 472f85845ac5b984e9491753fb58a62a
-      internalID: 777733128
+      spriteID: bf56c320bfc09344dad47b8a4f0586ae
+      internalID: 2030675697
       vertices: []
       indices: 
       edges: []
@@ -264,11 +264,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Bat-Hurt_0: 326575767
-      Bat-Hurt_1: 184217389
-      Bat-Hurt_2: -2138702345
-      Bat-Hurt_3: 1928820057
-      Bat-Hurt_4: 777733128
+      0: 2030675697
+      1: 1351961588
+      2: 838811454
+      3: -1737004616
+      4: 944156093
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

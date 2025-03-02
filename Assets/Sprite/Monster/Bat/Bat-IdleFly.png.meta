@@ -149,7 +149,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Bat-IdleFly_0
+      name: 8
       rect:
         serializedVersion: 2
         x: 0
@@ -157,20 +157,20 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b65d18c33e868094e93fef8c60523269
-      internalID: 1435064092
+      spriteID: c8c95a0b5dd4f864dbffc9dc7b72827d
+      internalID: -68203553
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bat-IdleFly_1
+      name: 7
       rect:
         serializedVersion: 2
         x: 64
@@ -178,20 +178,20 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 518fe6ef865a0a34aa27865b9334da54
-      internalID: -437284358
+      spriteID: d849d6fcdf2ffdd41bc43c23942b4eec
+      internalID: 1861154744
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bat-IdleFly_2
+      name: 6
       rect:
         serializedVersion: 2
         x: 128
@@ -199,20 +199,20 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2fb1363cc079fe641978d9fd79a5bbf9
-      internalID: -583136124
+      spriteID: 8603651654f406343a28199d608d0ceb
+      internalID: 1999934980
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bat-IdleFly_3
+      name: 5
       rect:
         serializedVersion: 2
         x: 192
@@ -220,20 +220,20 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 11e0e9d7f52e4c241a2fa3bfdb612e27
-      internalID: -1594228158
+      spriteID: 51fec1912d2fba04382bb2bacd51907f
+      internalID: -639406904
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bat-IdleFly_4
+      name: 4
       rect:
         serializedVersion: 2
         x: 256
@@ -241,20 +241,20 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c229598966c6fa84d830020c415a156f
-      internalID: -2104296697
+      spriteID: 1d8697bd00e22b347ad1b1fb463e31e1
+      internalID: -1864780894
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bat-IdleFly_5
+      name: 3
       rect:
         serializedVersion: 2
         x: 320
@@ -262,20 +262,20 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 48d483a5b15ee5948a235e0528a86aa3
-      internalID: 1625229645
+      spriteID: 5dfa95393012659499c617e754ff4d5a
+      internalID: -316022830
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bat-IdleFly_6
+      name: 2
       rect:
         serializedVersion: 2
         x: 384
@@ -283,20 +283,20 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e0fe3b2618368bf45932e6dac70707a0
-      internalID: 25473850
+      spriteID: 04f775aa412f99a409a7dcf7a4510e40
+      internalID: -298708594
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bat-IdleFly_7
+      name: 1
       rect:
         serializedVersion: 2
         x: 448
@@ -304,20 +304,20 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b3492a05bf101944c85877f042f3945e
-      internalID: 1724628732
+      spriteID: 0633b11bdf711ef4ca4d9380b97fd5b0
+      internalID: 1105659978
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bat-IdleFly_8
+      name: 0
       rect:
         serializedVersion: 2
         x: 512
@@ -325,14 +325,14 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bec7ac6a20e04a14990be3110a9be28b
-      internalID: 1394111472
+      spriteID: fe17583da3fea7243b828b3952f0e724
+      internalID: -1557778085
       vertices: []
       indices: 
       edges: []
@@ -348,15 +348,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Bat-IdleFly_0: 1435064092
-      Bat-IdleFly_1: -437284358
-      Bat-IdleFly_2: -583136124
-      Bat-IdleFly_3: -1594228158
-      Bat-IdleFly_4: -2104296697
-      Bat-IdleFly_5: 1625229645
-      Bat-IdleFly_6: 25473850
-      Bat-IdleFly_7: 1724628732
-      Bat-IdleFly_8: 1394111472
+      0: -1557778085
+      1: 1105659978
+      2: -298708594
+      3: -316022830
+      4: -1864780894
+      5: -639406904
+      6: 1999934980
+      7: 1861154744
+      8: -68203553
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
