@@ -49,7 +49,7 @@ public class MeleeHitbox : NamMonoBehaviour
             GroundMonsterController monster = collision.GetComponent<GroundMonsterController>();
             if (monster != null)
             {
-                monster.TakeDamage(damage);
+                //monster.TakeDamage(damage);
             }
         }
     }

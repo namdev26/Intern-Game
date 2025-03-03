@@ -15,10 +15,10 @@ MonoBehaviour:
   monsterName: GolemOrange
   patrolSpeed: 1
   chaseSpeed: 2
-  detectionRange: 1
+  detectionRange: 2
   attackRange: 1
-  patrolDistance: 5
+  patrolDistance: 6
   maxIdleTime: 2
-  maxHealth: 10
+  maxHealth: 1000
   wakeUpRange: 0
   moveHorizontallyOnly: 1

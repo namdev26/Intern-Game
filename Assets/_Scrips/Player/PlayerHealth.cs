@@ -27,8 +27,7 @@ public class PlayerHealth : MonoBehaviour
         // Kiểm tra cooldown và trạng thái bất tử trước khi nhận sát thương
         if (Time.time - lastDamageTime >= damageCooldown && !isInvincible)
         {
-            currentHealth -= damage;
-            Debug.Log($"Player nhận {damage} sát thương. Máu còn: {currentHealth}");
+            currentHealth -= damage;            Debug.Log($"Player nhận {damage} sát thương. Máu còn: {currentHealth}");
             lastDamageTime = Time.time; // Cập nhật thời gian nhận sát thương gần nhất
 
             if (currentHealth <= 0)

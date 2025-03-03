@@ -1,32 +1,40 @@
 ﻿using UnityEngine;
 
-public class PlayerController : NamMonoBehaviour
+public class PlayerController : NamMonoBehaviour // Giả sử NamMonoBehaviour là base class của bạn
 {
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float jumpForce = 5f;
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private Animator animator;
     [SerializeField] private Rigidbody2D rb;
-    [SerializeField] public bool onGround;
-    [SerializeField] public bool isAttacking;
-    [SerializeField] public bool isJumping;
-    private GameObject meleeHitbox; // Biến private cho hitbox
-    [SerializeField] private MeleeHitbox meleeHitboxScript; // Tham chiếu đến script MeleeHitbox
+    [SerializeField] private GameObject meleeHitbox;
+    [SerializeField] private MeleeHitbox meleeHitboxScript;
+    [SerializeField] private PlayerHealth playerHealth;
 
-    public PlayerStateMachine playerStateMachine;
+    [SerializeField] private bool onGround;
+    [SerializeField] private bool isAttacking;
+    [SerializeField] private bool isJumping;
+    [SerializeField] private bool facingRight = true;
+    private PlayerStateMachine playerStateMachine;
+    public PlayerStateMachine PlayerStateMachine => playerStateMachine;
+
+    // Các state của nhân vật
     private PlayerIdleState idleState;
     private PlayerRunState runState;
     private PlayerAttackState attackState;
     private PlayerJumpState jumpState;
     private PlayerHurtState hurtState;
 
-    private Vector2 VectorToRight = Vector2.right;
-    private Vector2 VectorToLeft = Vector2.left;
-    private Vector2 VectorToUp = Vector2.up;
+    // Properties để truy cập từ bên ngoài nếu cần
+    public bool OnGround => onGround;
+    public bool IsAttacking => isAttacking;
+    public bool IsJumping => isJumping;
 
-    [SerializeField] private PlayerHealth playerHealth; // Thêm tham chiếu đến PlayerHealth
-
-    //private SpriteRenderer spriteRenderer; // Để nhấp nháy khi bất tử (nếu cần)
+    // Thêm biến cho hiệu ứng bị đánh
+    [SerializeField] private float hurtLockDuration = 0.5f; // Thời gian khóa di chuyển khi bị đánh (giây)
+    private bool isHurtLocked;
+    private float hurtLockTimer;
+    [SerializeField] private float knockbackForce = 5f; // Lực hất lùi khi bị đánh
 
     protected override void LoadComponent()
     {
@@ -35,72 +43,58 @@ public class PlayerController : NamMonoBehaviour
         LoadAnimator();
         LoadRigidbody2D();
         LoadMeleeHitbox();
-        //LoadSpriteRenderer();
-        LoadPlayerHealth(); // Thêm phương thức để load PlayerHealth
+        LoadPlayerHealth();
     }
-
     protected virtual void LoadPlayerHealth()
     {
-        if (playerHealth != null) return;
-        playerHealth = GetComponent<PlayerHealth>();
-        if (playerHealth == null) Debug.LogError("PlayerHealth không tìm thấy trong " + transform.name);
+        playerHealth = playerHealth ?? GetComponent<PlayerHealth>();
+        if (playerHealth == null) Debug.LogError($"PlayerHealth không tìm thấy trong {transform.name}");
     }
 
     protected virtual void LoadPlayerInput()
     {
-        if (playerInput != null) return;
-        playerInput = GetComponentInChildren<PlayerInput>();
-        if (playerInput == null) Debug.LogError("PlayerInput không tìm thấy trong " + transform.name);
+        playerInput = playerInput ?? GetComponentInChildren<PlayerInput>();
+        if (playerInput == null) Debug.LogError($"PlayerInput không tìm thấy trong {transform.name}");
     }
 
     protected virtual void LoadAnimator()
     {
-        if (animator != null) return;
-        animator = GetComponentInChildren<Animator>();
-        if (animator == null) Debug.LogError("Animator không tìm thấy trong " + transform.name);
+        animator = animator ?? GetComponentInChildren<Animator>();
+        if (animator == null) Debug.LogError($"Animator không tìm thấy trong {transform.name}");
     }
 
     protected virtual void LoadRigidbody2D()
     {
-        if (rb != null) return;
-        rb = GetComponent<Rigidbody2D>();
-        if (rb == null) Debug.LogError("Rigidbody2D không tìm thấy trong " + transform.name);
+        rb = rb ?? GetComponent<Rigidbody2D>();
+        if (rb == null) Debug.LogError($"Rigidbody2D không tìm thấy trong {transform.name}");
     }
 
     protected virtual void LoadMeleeHitbox()
     {
-        if (meleeHitbox != null) return;
+        if (meleeHitbox != null)
+        {
+            AssignMeleeHitboxScript();
+            return;
+        }
         meleeHitbox = transform.Find("MeleeHitbox")?.gameObject;
         if (meleeHitbox == null)
         {
-            Debug.LogError("MeleeHitbox không tìm thấy trong " + transform.name);
+            Debug.LogError($"MeleeHitbox không tìm thấy trong {transform.name}");
             return;
         }
-        meleeHitboxScript = meleeHitbox.GetComponent<MeleeHitbox>();
-        if (meleeHitboxScript == null)
-        {
-            Debug.LogError("MeleeHitbox script không tìm thấy trong " + meleeHitbox.name);
-        }
+        AssignMeleeHitboxScript();
     }
 
-    //protected virtual void LoadSpriteRenderer()
-    //{
-    //    if (spriteRenderer != null) return;
-    //    spriteRenderer = GetComponent<SpriteRenderer>(); // Lấy SpriteRenderer của Player
-    //    if (spriteRenderer == null) Debug.LogWarning("SpriteRenderer không tìm thấy trong " + transform.name);
-    //}
+    private void AssignMeleeHitboxScript()
+    {
+        meleeHitboxScript = meleeHitbox.GetComponent<MeleeHitbox>();
+        if (meleeHitboxScript == null)
+            Debug.LogError($"MeleeHitbox script không tìm thấy trong {meleeHitbox.name}");
+    }
 
     private void Start()
     {
-        playerStateMachine = new PlayerStateMachine();
-        idleState = new PlayerIdleState(animator);
-        runState = new PlayerRunState(animator);
-        attackState = new PlayerAttackState(animator, playerInput);
-        jumpState = new PlayerJumpState(animator);
-        hurtState = new PlayerHurtState(animator);
-
-        playerStateMachine.SetState(idleState);
-
+        InitializeStateMachine();
         playerStateMachine.SetState(idleState);
     }
 
@@ -108,51 +102,47 @@ public class PlayerController : NamMonoBehaviour
     {
         HandleMovement();
         playerStateMachine.UpdateState();
+        UpdateHurtLock();
+    }
+
+    private void UpdateHurtLock()
+    {
+        if (isHurtLocked)
+        {
+            hurtLockTimer -= Time.deltaTime;
+            if (hurtLockTimer <= 0)
+            {
+                isHurtLocked = false;
+            }
+        }
     }
 
     private void HandleMovement()
     {
-        if (playerStateMachine.CurrentState is PlayerHurtState) return; // Không cho di chuyển khi bị Hurt
+        // Chỉ khóa di chuyển trong thời gian bị đánh (hurtLockDuration)
+        if (isHurtLocked) return;
 
         if (playerInput.Jump && onGround)
         {
-            if (isAttacking)
-            {
-                isAttacking = false;
-            }
-            PlayerJump(VectorToUp);
+            PlayerJump(Vector2.up);
         }
         else if (playerInput.BowAttack && onGround && !isAttacking)
         {
-            isAttacking = true;
-            attackState.SetAttackType("Bow");
-            playerStateMachine.SetState(attackState);
-            Debug.Log("Bắt đầu tấn công Bow");
+            StartAttack("Bow");
         }
         else if (playerInput.KnifeAttack && onGround && !isAttacking)
         {
-            isAttacking = true;
-            attackState.SetAttackType("Knife");
-            playerStateMachine.SetState(attackState);
-            Debug.Log("Bắt đầu tấn công Knife");
+            StartAttack("Knife");
         }
-        else if (playerInput.MoveRight)
+        else if (playerInput.MoveRight && !isAttacking)
         {
-            if (isAttacking)
-            {
-                isAttacking = false;
-            }
-            PlayerMove(VectorToRight);
-            RotatePlayer(false);
+            PlayerMove(Vector2.right);
+            if (!facingRight) RotatePlayer(false);
         }
-        else if (playerInput.MoveLeft)
+        else if (playerInput.MoveLeft && !isAttacking)
         {
-            if (isAttacking)
-            {
-                isAttacking = false;
-            }
-            PlayerMove(VectorToLeft);
-            RotatePlayer(true);
+            PlayerMove(Vector2.left);
+            if (facingRight) RotatePlayer(true);
         }
         else if (onGround && !isJumping && !isAttacking)
         {
@@ -160,23 +150,32 @@ public class PlayerController : NamMonoBehaviour
         }
     }
 
+    private void StartAttack(string attackType)
+    {
+        isAttacking = true;
+        attackState.SetAttackType(attackType);
+        playerStateMachine.SetState(attackState);
+        Debug.Log($"Bắt đầu tấn công {attackType}");
+    }
+
     public void TakeDamage(int damage)
     {
-        playerHealth.TakeDamage(damage); // Gọi TakeDamage từ PlayerHealth
-        if (playerHealth.CurrentHealth <= 0)
-        {
-            // Logic khi chết đã xử lý trong PlayerHealth
-        }
-        else
+        playerHealth.TakeDamage(damage);
+        if (playerHealth.CurrentHealth > 0)
         {
             StartHurtAnimation();
-            //animator.Play("Hurt");
         }
     }
 
-    private void Die()
+    public void TakeDamageWithKnockback(int damage, Vector2 knockbackDirection = default)
     {
-        // Logic Die đã chuyển sang PlayerHealth, không cần ở đây nữa
+        TakeDamage(damage);
+        if (playerHealth.CurrentHealth > 0 && knockbackDirection != Vector2.zero)
+        {
+            rb.velocity = new Vector2(knockbackDirection.x * knockbackForce, knockbackDirection.y * knockbackForce);
+            isHurtLocked = true;
+            hurtLockTimer = hurtLockDuration;
+        }
     }
 
     public void ResetAttackState()
@@ -189,31 +188,9 @@ public class PlayerController : NamMonoBehaviour
     {
         if (!onGround || isJumping) return;
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-        onGround = false;
+        SetOnGround(false); // Sử dụng phương thức SetOnGround
         isJumping = true;
         playerStateMachine.SetState(jumpState);
-    }
-
-    private void RotatePlayer(bool flip)
-    {
-        transform.rotation = Quaternion.Euler(0, flip ? 180 : 0, 0);
-        if (meleeHitbox != null)
-        {
-            // Xoay MeleeHitbox theo hướng của Player (localRotation)
-            meleeHitbox.transform.localRotation = Quaternion.Euler(0, flip ? 180 : 0, 0);
-
-            // Điều chỉnh vị trí hitbox theo hướng
-            Vector3 hitboxPos = meleeHitbox.transform.localPosition;
-            hitboxPos.x = Mathf.Abs(hitboxPos.x) * (flip ? -1 : 1);
-            meleeHitbox.transform.localPosition = hitboxPos;
-
-            // Điều chỉnh BoxCollider2D offset để khớp với hướng
-            BoxCollider2D boxCollider = meleeHitbox.GetComponent<BoxCollider2D>();
-            if (boxCollider != null)
-            {
-                boxCollider.offset = new Vector2(Mathf.Abs(boxCollider.offset.x) * (flip ? -1 : 1), boxCollider.offset.y);
-            }
-        }
     }
 
     private void PlayerMove(Vector2 direction)
@@ -225,44 +202,79 @@ public class PlayerController : NamMonoBehaviour
         }
     }
 
-    // Các hàm gọi từ Animation Event
-    public void ActivateHitbox()
+    public void SetOnGround(bool value)
     {
-        meleeHitboxScript.ActivateHitbox();
+        onGround = value;
     }
 
-    public void DeactivateHitbox()
+    public void SetIsJumping(bool value)
     {
-        meleeHitboxScript.DeactivateHitbox();
+        isJumping = value;
     }
+
+    public void SetIsAttacking(bool value)
+    {
+        isAttacking = value;
+    }
+
+    private void RotatePlayer(bool flip)
+    {
+        facingRight = !flip;
+        transform.rotation = Quaternion.Euler(0, flip ? 180 : 0, 0);
+        AdjustMeleeHitbox(flip);
+    }
+
+    private void AdjustMeleeHitbox(bool flip)
+    {
+        if (meleeHitbox == null) return;
+        meleeHitbox.transform.localRotation = Quaternion.Euler(0, flip ? 180 : 0, 0);
+        Vector3 hitboxPos = meleeHitbox.transform.localPosition;
+        hitboxPos.x = Mathf.Abs(hitboxPos.x) * (flip ? -1 : 1);
+        meleeHitbox.transform.localPosition = hitboxPos;
+
+        if (meleeHitbox.TryGetComponent(out BoxCollider2D boxCollider))
+        {
+            boxCollider.offset = new Vector2(Mathf.Abs(boxCollider.offset.x) * (flip ? -1 : 1), boxCollider.offset.y);
+        }
+    }
+
+    public void ActivateHitbox() => meleeHitboxScript?.ActivateHitbox();
+    public void DeactivateHitbox() => meleeHitboxScript?.DeactivateHitbox();
 
     public void StartHurtAnimation()
     {
         if (playerHealth.CurrentHealth > 0 && !(playerStateMachine.CurrentState is PlayerHurtState))
         {
             playerStateMachine.SetState(hurtState);
-            Debug.Log("Player chuyển sang trạng thái Hurt qua Animation Event");
+            Debug.Log("Player chuyển sang trạng thái Hurt");
         }
     }
 
     public void EndHurtAnimation()
     {
-        if (onGround && !(playerStateMachine.CurrentState is PlayerHurtState))
+        if (onGround && playerStateMachine.CurrentState is PlayerHurtState)
         {
             playerStateMachine.SetState(idleState);
             Debug.Log("Player thoát trạng thái Hurt và chuyển về Idle");
         }
     }
 
+    private void InitializeStateMachine()
+    {
+        playerStateMachine = new PlayerStateMachine();
+        idleState = new PlayerIdleState(animator);
+        runState = new PlayerRunState(animator);
+        attackState = new PlayerAttackState(animator, playerInput);
+        jumpState = new PlayerJumpState(animator);
+        hurtState = new PlayerHurtState(animator);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("EnemyAttack") && !playerHealth.IsInvincible) // Sử dụng IsInvincible từ PlayerHealth
+        if (collision.CompareTag("EnemyAttack") && !playerHealth.IsInvincible)
         {
-            PlayerHealth playerHealth = collision.GetComponent<PlayerHealth>();
-            if (playerHealth != null)
-            {
-                playerHealth.TakeDamage(10); // Gây 10 sát thương khi bị hitbox tấn công của quái chạm
-            }
+            Vector2 knockbackDirection = (transform.position - collision.transform.position).normalized;
+            TakeDamageWithKnockback(10, knockbackDirection);
         }
     }
 }

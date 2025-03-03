@@ -21,17 +21,17 @@ public class FlyMonsterController : BaseMonsterController
         ChangeState(flySleepState);
     }
 
-    protected override void Update()
-    {
-        base.Update();
-    }
+    //protected override void Update()
+    //{
+    //    base.Update();
+    //}
 
-    // Quay m?t theo ng??i ch?i (t??ng t? MonsterController)
-    public void UpdateFacingDirectionToPlayer()
-    {
-        if (player != null)
-        {
-            UpdateFacingDirection(player.position);
-        }
-    }
+    //// Quay m?t theo ng??i ch?i (t??ng t? MonsterController)
+    //public void UpdateFacingDirectionToPlayer()
+    //{
+    //    if (player != null)
+    //    {
+    //        UpdateFacingDirection(player.position);
+    //    }
+    //}
 }

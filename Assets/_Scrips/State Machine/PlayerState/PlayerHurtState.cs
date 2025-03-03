@@ -22,9 +22,9 @@ public class PlayerHurtState : State
         if (hurtTimer <= 0)
         {
             PlayerController player = animator.GetComponentInParent<PlayerController>();
-            if (player != null && player.onGround)
+            if (player != null && player.OnGround)
             {
-                player.playerStateMachine.SetState(new PlayerIdleState(animator));
+                player.PlayerStateMachine.SetState(new PlayerIdleState(animator));
             }
         }
     }

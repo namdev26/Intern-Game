@@ -20,14 +20,14 @@ public class PlayerFeetBoxCast : NamMonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            playerController.onGround = true;
-            playerController.isJumping = false; // Đặt lại isJumping khi chạm đất
+            playerController.SetOnGround(true);
+            playerController.SetIsJumping(false); // Đặt lại isJumping khi chạm đất
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        playerController.onGround = false;
-        playerController.isJumping = true; // Đặt isJumping khi rời khỏi đất
+        playerController.SetOnGround(false);
+        playerController.SetIsJumping(true);// Đặt isJumping khi rời khỏi đất
     }
 }
