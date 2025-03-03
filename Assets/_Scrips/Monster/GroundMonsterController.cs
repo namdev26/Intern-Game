@@ -11,23 +11,4 @@ public class GroundMonsterController : BaseMonsterController
         dieState = new MonsterDieState(this, animator);
         hurtState = new MonsterHurtState(this, animator);
     }
-
-    //protected override void Start()
-    //{
-    //    base.Start();
-    //}
-
-    //protected override void Update()
-    //{
-    //    base.Update();
-    //}
-
-    //// Quay mặt theo người chơi (tương tự MonsterController)
-    //public void UpdateFacingDirectionToPlayer()
-    //{
-    //    if (player != null)
-    //    {
-    //        UpdateFacingDirection(player.position);
-    //    }
-    //}
 }

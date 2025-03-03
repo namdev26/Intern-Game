@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PlayerController : NamMonoBehaviour // Giả sử NamMonoBehaviour là base class của bạn
+public class PlayerController : NamMonoBehaviour // Giả sử NamMonoBehaviour là base class
 {
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float jumpForce = 5f;
@@ -31,10 +31,10 @@ public class PlayerController : NamMonoBehaviour // Giả sử NamMonoBehaviour 
     public bool IsJumping => isJumping;
 
     // Thêm biến cho hiệu ứng bị đánh
-    [SerializeField] private float hurtLockDuration = 0.5f; // Thời gian khóa di chuyển khi bị đánh (giây)
+    [SerializeField] private float hurtLockDuration = 0.5f;
     private bool isHurtLocked;
     private float hurtLockTimer;
-    [SerializeField] private float knockbackForce = 5f; // Lực hất lùi khi bị đánh
+    [SerializeField] private float knockbackForce = 5f;
 
     protected override void LoadComponent()
     {
@@ -45,6 +45,8 @@ public class PlayerController : NamMonoBehaviour // Giả sử NamMonoBehaviour 
         LoadMeleeHitbox();
         LoadPlayerHealth();
     }
+
+    #region Load Components
     protected virtual void LoadPlayerHealth()
     {
         playerHealth = playerHealth ?? GetComponent<PlayerHealth>();
@@ -59,7 +61,7 @@ public class PlayerController : NamMonoBehaviour // Giả sử NamMonoBehaviour 
 
     protected virtual void LoadAnimator()
     {
-        animator = animator ?? GetComponentInChildren<Animator>();
+        animator = animator ?? GetComponent<Animator>();
         if (animator == null) Debug.LogError($"Animator không tìm thấy trong {transform.name}");
     }
 
@@ -91,6 +93,7 @@ public class PlayerController : NamMonoBehaviour // Giả sử NamMonoBehaviour 
         if (meleeHitboxScript == null)
             Debug.LogError($"MeleeHitbox script không tìm thấy trong {meleeHitbox.name}");
     }
+    #endregion
 
     private void Start()
     {
@@ -119,28 +122,46 @@ public class PlayerController : NamMonoBehaviour // Giả sử NamMonoBehaviour 
 
     private void HandleMovement()
     {
-        // Chỉ khóa di chuyển trong thời gian bị đánh (hurtLockDuration)
         if (isHurtLocked) return;
 
         if (playerInput.Jump && onGround)
         {
+            if (isAttacking) InterruptAttack();
             PlayerJump(Vector2.up);
         }
-        else if (playerInput.BowAttack && onGround && !isAttacking)
+        else if (playerInput.BowAttack && onGround)
         {
-            StartAttack("Bow");
+            if (!isAttacking)
+            {
+                StartAttack("Bow");
+            }
+            else
+            {
+                InterruptAttack();
+                StartAttack("Bow");
+            }
         }
-        else if (playerInput.KnifeAttack && onGround && !isAttacking)
+        else if (playerInput.KnifeAttack && onGround)
         {
-            StartAttack("Knife");
+            if (!isAttacking)
+            {
+                StartAttack("Knife");
+            }
+            else
+            {
+                InterruptAttack();
+                StartAttack("Knife");
+            }
         }
-        else if (playerInput.MoveRight && !isAttacking)
+        else if (playerInput.MoveRight)
         {
+            if (isAttacking) InterruptAttack();
             PlayerMove(Vector2.right);
             if (!facingRight) RotatePlayer(false);
         }
-        else if (playerInput.MoveLeft && !isAttacking)
+        else if (playerInput.MoveLeft)
         {
+            if (isAttacking) InterruptAttack();
             PlayerMove(Vector2.left);
             if (facingRight) RotatePlayer(true);
         }
@@ -150,12 +171,25 @@ public class PlayerController : NamMonoBehaviour // Giả sử NamMonoBehaviour 
         }
     }
 
+    #region Player Actions
     private void StartAttack(string attackType)
     {
         isAttacking = true;
         attackState.SetAttackType(attackType);
         playerStateMachine.SetState(attackState);
+        ActivateHitbox(); // Kích hoạt hitbox khi bắt đầu tấn công
         Debug.Log($"Bắt đầu tấn công {attackType}");
+    }
+
+    private void InterruptAttack()
+    {
+        if (!isAttacking) return;
+
+        isAttacking = false;
+        DeactivateHitbox(); // Tắt hitbox ngay lập tức
+        animator.Play("Idle"); // Chuyển về Idle ngay lập tức
+        playerStateMachine.SetState(idleState); // Chuyển state về Idle
+        Debug.Log("Tấn công bị ngắt quãng");
     }
 
     public void TakeDamage(int damage)
@@ -181,14 +215,19 @@ public class PlayerController : NamMonoBehaviour // Giả sử NamMonoBehaviour 
     public void ResetAttackState()
     {
         isAttacking = false;
+        DeactivateHitbox();
         Debug.Log("Đã reset trạng thái tấn công");
+        if (onGround && !isJumping)
+        {
+            playerStateMachine.SetState(idleState);
+        }
     }
 
     private void PlayerJump(Vector2 direction)
     {
         if (!onGround || isJumping) return;
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-        SetOnGround(false); // Sử dụng phương thức SetOnGround
+        SetOnGround(false);
         isJumping = true;
         playerStateMachine.SetState(jumpState);
     }
@@ -268,6 +307,7 @@ public class PlayerController : NamMonoBehaviour // Giả sử NamMonoBehaviour 
         jumpState = new PlayerJumpState(animator);
         hurtState = new PlayerHurtState(animator);
     }
+    #endregion
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

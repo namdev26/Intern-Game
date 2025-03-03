@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class BaseMonsterController : MonoBehaviour
+public abstract class BaseMonsterController : NamMonoBehaviour
 {
     [SerializeField] protected MonsterData data; // D? li?u c?u hình
     public MonsterData MonsterData => data;
@@ -8,12 +8,13 @@ public abstract class BaseMonsterController : MonoBehaviour
     protected Animator animator;
     public Transform player;
     public Vector2 startPos;
-    protected int health;
+    [SerializeField] protected int health;
     protected bool isStunned;
     protected bool isAttacking;
 
     [SerializeField] protected GameObject attackHitbox;
     [SerializeField] protected MonsterAttackHitbox attackHitboxScript;
+    [SerializeField] protected HealthBar healthBar;
 
     // Các tr?ng thái
     protected State idleState;
@@ -57,6 +58,7 @@ public abstract class BaseMonsterController : MonoBehaviour
 
         InitializeStates();
         ChangeState(idleState);
+        healthBar.SetHealth(health, data.maxHealth);
     }
 
     protected virtual void Update()
@@ -65,6 +67,7 @@ public abstract class BaseMonsterController : MonoBehaviour
         {
             currentState.DoState();
         }
+        //healthBar.SetHealth(health, data.maxHealth);
     }
 
     protected abstract void InitializeStates();
@@ -98,6 +101,7 @@ public abstract class BaseMonsterController : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
+        healthBar.SetHealth(health, data.maxHealth);
         if (health <= 0) ChangeState(dieState);
         else ChangeState(hurtState);
     }
