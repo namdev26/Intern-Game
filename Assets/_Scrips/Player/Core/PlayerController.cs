@@ -10,6 +10,7 @@ public class PlayerController : NamMonoBehaviour // Giả sử NamMonoBehaviour 
     [SerializeField] private GameObject meleeHitbox;
     [SerializeField] private MeleeHitbox meleeHitboxScript;
     [SerializeField] private PlayerHealth playerHealth;
+    [SerializeField] private PlayerHPBarUI playerHPBarUI;
 
     [SerializeField] private bool onGround;
     [SerializeField] private bool isAttacking;
@@ -36,69 +37,11 @@ public class PlayerController : NamMonoBehaviour // Giả sử NamMonoBehaviour 
     private float hurtLockTimer;
     [SerializeField] private float knockbackForce = 5f;
 
-    protected override void LoadComponent()
-    {
-        base.LoadComponent();
-        LoadPlayerInput();
-        LoadAnimator();
-        LoadRigidbody2D();
-        LoadMeleeHitbox();
-        LoadPlayerHealth();
-    }
-
-    #region Load Components
-    protected virtual void LoadPlayerHealth()
-    {
-        playerHealth = playerHealth ?? GetComponent<PlayerHealth>();
-        if (playerHealth == null) Debug.LogError($"PlayerHealth không tìm thấy trong {transform.name}");
-    }
-
-    protected virtual void LoadPlayerInput()
-    {
-        playerInput = playerInput ?? GetComponentInChildren<PlayerInput>();
-        if (playerInput == null) Debug.LogError($"PlayerInput không tìm thấy trong {transform.name}");
-    }
-
-    protected virtual void LoadAnimator()
-    {
-        animator = animator ?? GetComponent<Animator>();
-        if (animator == null) Debug.LogError($"Animator không tìm thấy trong {transform.name}");
-    }
-
-    protected virtual void LoadRigidbody2D()
-    {
-        rb = rb ?? GetComponent<Rigidbody2D>();
-        if (rb == null) Debug.LogError($"Rigidbody2D không tìm thấy trong {transform.name}");
-    }
-
-    protected virtual void LoadMeleeHitbox()
-    {
-        if (meleeHitbox != null)
-        {
-            AssignMeleeHitboxScript();
-            return;
-        }
-        meleeHitbox = transform.Find("MeleeHitbox")?.gameObject;
-        if (meleeHitbox == null)
-        {
-            Debug.LogError($"MeleeHitbox không tìm thấy trong {transform.name}");
-            return;
-        }
-        AssignMeleeHitboxScript();
-    }
-
-    private void AssignMeleeHitboxScript()
-    {
-        meleeHitboxScript = meleeHitbox.GetComponent<MeleeHitbox>();
-        if (meleeHitboxScript == null)
-            Debug.LogError($"MeleeHitbox script không tìm thấy trong {meleeHitbox.name}");
-    }
-    #endregion
-
     private void Start()
     {
         InitializeStateMachine();
         playerStateMachine.SetState(idleState);
+        playerHPBarUI.UpdateHPPlayer(playerHealth.CurrentHealth);
     }
 
     private void Update()
@@ -195,6 +138,7 @@ public class PlayerController : NamMonoBehaviour // Giả sử NamMonoBehaviour 
     public void TakeDamage(int damage)
     {
         playerHealth.TakeDamage(damage);
+        playerHPBarUI.UpdateHPPlayer(playerHealth.CurrentHealth);
         if (playerHealth.CurrentHealth > 0)
         {
             StartHurtAnimation();

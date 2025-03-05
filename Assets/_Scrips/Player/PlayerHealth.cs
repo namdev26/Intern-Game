@@ -2,7 +2,8 @@
 
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] private int maxHealth = 100; // Máu tối đa
+    [SerializeField] private static int maxHealth = 100; // Máu tối đa
+    public static int MaxHealth => maxHealth;
     [SerializeField] private int currentHealth; // Máu hiện tại
 
     // Thêm biến để theo dõi thời gian cooldown nhận sát thương
@@ -27,7 +28,7 @@ public class PlayerHealth : MonoBehaviour
         // Kiểm tra cooldown và trạng thái bất tử trước khi nhận sát thương
         if (Time.time - lastDamageTime >= damageCooldown && !isInvincible)
         {
-            currentHealth -= damage;            Debug.Log($"Player nhận {damage} sát thương. Máu còn: {currentHealth}");
+            currentHealth -= damage; Debug.Log($"Player nhận {damage} sát thương. Máu còn: {currentHealth}");
             lastDamageTime = Time.time; // Cập nhật thời gian nhận sát thương gần nhất
 
             if (currentHealth <= 0)
