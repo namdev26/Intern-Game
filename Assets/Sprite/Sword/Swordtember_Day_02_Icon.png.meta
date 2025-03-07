@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1f437e4fda18a5e449d0e77e41444a99
+guid: 7fbd71e99e7be3544befebf1fa041b2b
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -149,85 +149,190 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Tab
+      name: Swordtember_Day_02_Icon_0
       rect:
         serializedVersion: 2
-        x: 416
-        y: 192
+        x: 0
+        y: 0
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 277f58bbffd2a5544a8bfb773fff3458
-      internalID: 2020765922
+      spriteID: 6dff0b1679556e9499a27932b41ae450
+      internalID: -1258164745
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Spritesheet_UI_Flat_0
-      rect:
-        serializedVersion: 2
-        x: 448
-        y: 236
-        width: 32
-        height: 8
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d321ef9723ff9f441af810147ed9baaf
-      internalID: -894146863
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Spritesheet_UI_Flat_1
+      name: Swordtember_Day_02_Icon_1
       rect:
         serializedVersion: 2
         x: 32
-        y: 192
-        width: 96
-        height: 64
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f098944d5ae8d1345843608f81c210a4
-      internalID: 338176183
+      spriteID: ae055dc85c2dcc545a9bb2279ee19cd4
+      internalID: -96653393
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Spritesheet_UI_Flat_2
+      name: Swordtember_Day_02_Icon_2
       rect:
         serializedVersion: 2
-        x: 551
-        y: 104
-        width: 17
-        height: 16
+        x: 64
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fe393af99ffdb3b4cbc76f5494f10060
-      internalID: 531621663
+      spriteID: 905e7373eaf0fcf4ab0b54c92e1fb431
+      internalID: -1065717757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Swordtember_Day_02_Icon_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46ae04769fee7bd438d3d974c962f380
+      internalID: -1848244194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Swordtember_Day_02_Icon_4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb059c5128926dc4e8a8f56f50863901
+      internalID: -1175210514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Swordtember_Day_02_Icon_5
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 443796cb3791e1b4996f8918abbc6a84
+      internalID: 1933820128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Swordtember_Day_02_Icon_6
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be04eb01649e67c4e98f6d4e93066215
+      internalID: -408155850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Swordtember_Day_02_Icon_7
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 99de37dad1b611a44a551b56d9eab575
+      internalID: -1813530703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Swordtember_Day_02_Icon_8
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de663a7f922eb434c8864a4756cc2d7e
+      internalID: -918749735
       vertices: []
       indices: 
       edges: []
@@ -243,10 +348,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Spritesheet_UI_Flat_0: -894146863
-      Spritesheet_UI_Flat_1: 338176183
-      Spritesheet_UI_Flat_2: 531621663
-      Tab: 2020765922
+      Swordtember_Day_02_Icon_0: -1258164745
+      Swordtember_Day_02_Icon_1: -96653393
+      Swordtember_Day_02_Icon_2: -1065717757
+      Swordtember_Day_02_Icon_3: -1848244194
+      Swordtember_Day_02_Icon_4: -1175210514
+      Swordtember_Day_02_Icon_5: 1933820128
+      Swordtember_Day_02_Icon_6: -408155850
+      Swordtember_Day_02_Icon_7: -1813530703
+      Swordtember_Day_02_Icon_8: -918749735
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
