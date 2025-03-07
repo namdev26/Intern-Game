@@ -14,7 +14,7 @@ public abstract class BaseMonsterController : NamMonoBehaviour
 
     [SerializeField] protected GameObject attackHitbox;
     [SerializeField] protected MonsterAttackHitbox attackHitboxScript;
-    [SerializeField] protected HealthBar healthBar;
+    //[SerializeField] protected HealthBar healthBar;
 
     // Các tr?ng thái
     protected State idleState;
@@ -58,7 +58,7 @@ public abstract class BaseMonsterController : NamMonoBehaviour
 
         InitializeStates();
         ChangeState(idleState);
-        healthBar.SetHealth(health, data.maxHealth);
+        //healthBar.SetHealth(health, data.maxHealth);
     }
 
     protected virtual void Update()
@@ -101,7 +101,7 @@ public abstract class BaseMonsterController : NamMonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
-        healthBar.SetHealth(health, data.maxHealth);
+        //healthBar.SetHealth(health, data.maxHealth);
         if (health <= 0) ChangeState(dieState);
         else ChangeState(hurtState);
     }
