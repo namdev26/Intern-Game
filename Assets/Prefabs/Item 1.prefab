@@ -139,6 +139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ID: 1
+  itemName: Item 1
 --- !u!212 &-4959320931420249440
 SpriteRenderer:
   m_ObjectHideFlags: 0
