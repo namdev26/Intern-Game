@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -5,4 +7,5 @@ using UnityEngine;
 public class SaveData
 {
     public Vector3 playerPosition;
+    public List<InventorySaveData> inventorySaveData;
 }

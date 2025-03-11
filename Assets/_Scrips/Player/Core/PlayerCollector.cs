@@ -2,12 +2,20 @@ using UnityEngine;
 
 public class PlayerCollector : MonoBehaviour
 {
+    [SerializeField] private InventoryController inventoryController;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        IItem item = collision.gameObject.GetComponent<IItem>();
-        if (item != null)
+        if (collision.CompareTag("Item"))
         {
-            item.Collect();
+            Item item = collision.GetComponent<Item>();
+            if (item != null)
+            {
+                bool itemAdded = inventoryController.AddItem(collision.gameObject);
+                if (itemAdded)
+                {
+                    Destroy(collision.gameObject);
+                }
+            }
         }
     }
 }

@@ -88,4 +88,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a346aa5c1f35254e88b8207828d1657, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentSlot: {fileID: 0}
+  currentItem: {fileID: 0}
