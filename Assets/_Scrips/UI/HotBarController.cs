@@ -6,7 +6,7 @@ public class HotBarController : MonoBehaviour
 {
     public GameObject hotBarPanel;
     public GameObject slotPrefab;
-    public int slotCount = 6;
+    public int slotCount = 9;
     private ItemDictionary itemDictionary;
 
     private Key[] hotBarKeys;
@@ -17,7 +17,7 @@ public class HotBarController : MonoBehaviour
         hotBarKeys = new Key[slotCount];
         for (int i = 0; i < slotCount; i++)
         {
-            hotBarKeys[i] = i < 5 ? (Key)(int)(Key.Digit1 + i) : Key.Digit0;
+            hotBarKeys[i] = i < 8 ? (Key)(int)(Key.Digit1 + i) : Key.Digit0;
         }
     }
 
